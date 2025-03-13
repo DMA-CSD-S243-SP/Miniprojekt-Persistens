@@ -10,14 +10,14 @@ package model;
  */
 public class Product
 {
-	private int productId;
-	private String name;
-	private double purchasePrice;
-	private double salesPrice;
-	private String countryOfOrigin;
-	private int minStock;
+    private int productId;
+    private String name;
+    private double purchasePrice;
+    private double salesPrice;
+    private String countryOfOrigin;
+    private int minStock;
 
-	
+
 	/**
 	 * Constructs a new Product with the specified attributes.
 	 *

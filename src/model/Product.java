@@ -5,9 +5,10 @@ package model;
  * and minimum stock. 
  * 
  * @author Line Bertelsen
- * @date 12.03.2025 - 17:40
+ * @date 12.03.2025 - 17:59
  */
-public class Product {
+public class Product 
+{
 
     private int productId;
     private String name;
@@ -15,6 +16,7 @@ public class Product {
     private double salesPrice;
     private String countryOfOrigin;
     private int minStock;
+    private int refill;
 
     /**
      * Constructs a new Product with the specified attributes.
@@ -40,7 +42,8 @@ public class Product {
      *
      * @return the product ID
      */
-    public int getProductId() {
+    public int getProductId() 
+    {
         return productId;
     }
 
@@ -49,7 +52,8 @@ public class Product {
      *
      * @param productId the new product ID
      */
-    private void setProductId(int productId) {
+    private void setProductId(int productId) 
+    {
         this.productId = productId;
     }
 
@@ -58,7 +62,8 @@ public class Product {
      *
      * @return the product name
      */
-    public String getName() {
+    public String getName() 
+    {
         return name;
     }
 
@@ -67,7 +72,8 @@ public class Product {
      *
      * @param name the new product name
      */
-    public void setName(String name) {
+    public void setName(String name) 
+    {
         this.name = name;
     }
 
@@ -76,7 +82,8 @@ public class Product {
      *
      * @return the purchase price
      */
-    public double getPurchasePrice() {
+    public double getPurchasePrice() 
+    {
         return purchasePrice;
     }
 
@@ -85,7 +92,8 @@ public class Product {
      *
      * @param purchasePrice the new purchase price
      */
-    public void setPurchasePrice(double purchasePrice) {
+    public void setPurchasePrice(double purchasePrice) 
+    {
         this.purchasePrice = purchasePrice;
     }
 
@@ -94,7 +102,8 @@ public class Product {
      *
      * @return the sales price
      */
-    public double getSalesPrice() {
+    public double getSalesPrice() 
+    {
         return salesPrice;
     }
 
@@ -103,7 +112,8 @@ public class Product {
      *
      * @param salesPrice the new sales price
      */
-    public void setSalesPrice(double salesPrice) {
+    public void setSalesPrice(double salesPrice) 
+    {
         this.salesPrice = salesPrice;
     }
 
@@ -112,7 +122,8 @@ public class Product {
      *
      * @return the country of origin
      */
-    public String getCountryOfOrigin() {
+    public String getCountryOfOrigin() 
+    {
         return countryOfOrigin;
     }
 
@@ -121,7 +132,8 @@ public class Product {
      *
      * @param countryOfOrigin the new country of origin
      */
-    public void setCountryOfOrigin(String countryOfOrigin) {
+    public void setCountryOfOrigin(String countryOfOrigin) 
+    {
         this.countryOfOrigin = countryOfOrigin;
     }
 
@@ -130,7 +142,8 @@ public class Product {
      *
      * @return the minimum stock level
      */
-    public int getMinStock() {
+    public int getMinStock() 
+    {
         return minStock;
     }
 
@@ -139,9 +152,9 @@ public class Product {
      *
      * @param minStock the new minimum stock level
      */
-    public void setMinStock(int minStock) {
-    	//TODO:
-        this.minStock = minStock;
+    public void setMinStock(int minStock)
+    {
+    	  	this.minStock = minStock;
     }
 
     /**
@@ -150,7 +163,8 @@ public class Product {
      * @return a string containing product details
      */
     @Override
-    public String toString() {
+    public String toString() 
+    {
         return "Product [productId=" + productId +
                ", name=" + name + '\'' +
                ", purchasePrice=" + purchasePrice +

@@ -1,8 +1,10 @@
 package Controller;
 
-import java.util.ArrayList;
+import java.sql.SQLException;
 import java.util.List;
 
+import database.CustomerDB;
+import database.DataAccessException;
 import model.Customer;
 
 
@@ -15,19 +17,30 @@ import model.Customer;
 public class CustomerController 
 {
 
+	private CustomerDB CDB;
+
+
 	/**
 	 * this method returns a list of all Customer objects in the database. 
 	 * 
 	 * @return returns a list of all Customer objects
+	 * @throws DataAccessException 
 	 */
-	public CustomerController()
+	public CustomerController() throws DataAccessException 
 	{
-		
+	try 
+	{
+		CDB = new CustomerDB();
+	} catch (SQLException e) 
+	{
+		throw new DataAccessException("Can't create GroupDB", e);
+	}
 	}
 	
-	public List<Customer> findAllCustomers()
+	
+	public List<Customer> findAllCustomers() throws DataAccessException
 	{
-		return CustomerDB.findAllCustomer();
+		return CDB.findAllCustomers();
 	}
 	
 	
@@ -38,10 +51,11 @@ public class CustomerController
 	 * @param customerEmail - the search parameter 
 	 * 
 	 * @return a customer object that  matches the search parameter
+	 * @throws DataAccessException
 	 */
-	public Customer findCustomerByEmail(String customerEmail)
+	public Customer findCustomerByEmail(String customerEmail) throws DataAccessException
 	{
-		return CustomerDB.findCustomerByEmail(customerEmail);
+		return CDB.findCustomerByEmail(customerEmail);
 	
 	}
 }

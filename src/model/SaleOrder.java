@@ -361,7 +361,7 @@ public class SaleOrder
     }
 
     
-    private void printSaleOrder()
+    public void printSaleOrder()
     {
     	// Used to calculate the subTotal price of all the products
     	double subTotal = 0.00;
@@ -475,7 +475,7 @@ public class SaleOrder
     /**
      * Prints the invoice details.
      */
-    private void printInvoice()
+    public void printInvoice()
     {
     	System.out.println("Faktura ");
     	System.out.println("--------------------------------");

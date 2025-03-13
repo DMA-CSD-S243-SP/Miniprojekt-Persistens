@@ -49,7 +49,7 @@ public class DBConnection
 		}
 	}
 	
-	public static DBConnection getInstance() throws DataAccessException
+	public static DBConnection getInstance()
 	{
 		if(dbConnection == null) 
 		{

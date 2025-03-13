@@ -239,7 +239,7 @@ public class SaleOrder
      *
      * @return true if the order is delivered, otherwise false.
      */
-    public boolean getDeliveryStatus()
+    public boolean isDeliveryStatus()
     {
         return deliveryStatus;
     }

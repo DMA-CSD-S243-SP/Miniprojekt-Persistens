@@ -10,7 +10,7 @@ import model.Customer;
 
 
 /**
- * TODO
+ * A controller class for Customer.
  * 
  * @author Anders Have
  * @version 12/03/2025 - 20:30

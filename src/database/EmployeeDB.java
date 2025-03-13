@@ -10,19 +10,26 @@ import model.Employee;
 
 
 /**
- * TODO
+ * This class is responsible for accessing 
+ * and managing employee objects stored in a database.
+ * 
+ * It implements the employeeDapImpl, 
+ * meaning its implements its methods
  * 
  * @author Anders Have
- * @version 13/03/2025 - 11:00
+ * @version 13/03/2025 - 13:45
  */
 public class EmployeeDB implements EmployeeDaoImpl 
 {
-	private static final String FIND_ALL_QUERIES = "SELECT employeeId, firstName, lastName, title, phoneNumber, emailAddress, country, state,"
-			+ "postalCode, streetName, houseNumber, floorNumber, doorNumber from employee";
+	// this selects all the colums in the employee tabel
+	private static final String FIND_ALL_QUERIES = "SELECT employeeId, firstName, lastName, title, phoneNumber, emailAddress, streetName,"
+			+ "streetName, houseNumber, floorNumber, doorNumber, stateName, postalCode from employee";
+	// this builds on FIND_ALL_QUERIES by adding a filter and a placeholder.
 	private static final String FIND_ALL_EMPLOYEEID_QUERY = FIND_ALL_QUERIES + "where employeeId = ?";
 	
 	private PreparedStatement findAllEmployee; 
 	private PreparedStatement findByEmployeeId;
+	
 	
 	public EmployeeDB() throws SQLException 
 	{
@@ -33,6 +40,9 @@ public class EmployeeDB implements EmployeeDaoImpl
 	}
 	
 	
+	/**
+	 * 
+	 */
 	@Override
 	public List<Employee> findAllEmployees(boolean fullAssociation) throws DataAccessException
 	{

@@ -12,12 +12,14 @@ import model.Customer;
  * TODO
  * 
  * @author Anders Have
- * @version 13/03/2025 - 9:20
+ * @version 13/03/2025 - 13:35
  */
 public class CustomerDB implements CustomerDaoImpl
 {
-	private static final String FIND_ALL_QUERIES = "SELECT customerId, firstName, lastName, customerType, phoneNumber, emailAddress, clubMember, purchaseThreshhold, country, state,"
-			+ "postalCode, streetName, houseNumber, floorNumber, doorNumber from Customer";
+	// it selects all the data in the Customer tabel 
+	private static final String FIND_ALL_QUERIES = "SELECT emailAddress, id, firstName, lastName, title, phoneNumber, streetNumber, houseNumber, floorNumber,"
+			+ " doorNumber, stateName, postalCode from Customer";
+	// this builds on FIND_ALL_QUERIES by adding a filter with a placeholder 
 	private static final String FIND_ALL_CUSTOMEREMAIL_QUERY = FIND_ALL_QUERIES + "where emailAddress = ?";
 	
 	private PreparedStatement findAllCustomer; 
@@ -31,12 +33,18 @@ public class CustomerDB implements CustomerDaoImpl
 	}
 	
 	
+	/**
+	 * this method finds all the Customers in the database
+	 */
 	@Override
 	public List<Customer> findAllCustomers() throws DataAccessException 
 	{
 		try 
 		{
+			//executes the preparedstatement
 			ResultSet resultSet = findAllCustomer.executeQuery();
+			
+			//makes a list and asks buildObjects to make the data into java objects 
 			List<Customer> res = buildObjects(resultSet);
 			return res;
 		} catch (SQLException e) 
@@ -46,15 +54,21 @@ public class CustomerDB implements CustomerDaoImpl
 	}
 
 	
+	/**
+	 * this method find a single Customer by searching with customerEmail.
+	 */
 	@Override
 	public Customer findCustomerByEmail(String customerEmail) throws DataAccessException 
 	{
 		try {
+			// adds the parameter to the String instead of the placeholder.
 			findByCustomerEmail.setString(1, customerEmail);
+			//executes the preparedstatement
 			ResultSet resultSet = findByCustomerEmail.executeQuery();
 			Customer c = null;
 			if(resultSet.next()) 
 			{
+				// makes a Customer object out of the data found.
 				c = buildObject(resultSet);
 			}
 			return c;

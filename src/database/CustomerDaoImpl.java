@@ -5,8 +5,6 @@ import model.Customer;
 
 
 /**
- * TODO
- * 
  * @author Anders Have & Lumière Schack
  * @version 13/03/2025 - 10:54
  */

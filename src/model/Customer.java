@@ -33,6 +33,7 @@ public class Customer
 	/**
 	 * Constructs a new Customer object with all necessary details.
 	 *
+	 * @param customerNumber     The customer's unique id.
 	 * @param firstName          The customer's first name.
 	 * @param lastName           The customer's last name.
 	 * @param customerType       The type of customer (e.g., regular, VIP).

@@ -20,10 +20,10 @@ public class DBConnection
 	private static DBConnection dbConnection;
 	
 	private static final String driverClass = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-	private static final String dbName = "DMA-CSD-S243_10644781";
+	private static final String dbName = "DMA_CSD_S243_10644781";
 	private static final String serverAddress = "127.0.0.1";
 	private static final int    serverPort = 1433;
-	private static final String userName = "DMA-CSD-S243_10644781";
+	private static final String userName = "DMA_CSD_S243_10644781";
 	private static final String password = "Password1!";
 	
 	

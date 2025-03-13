@@ -293,8 +293,8 @@ public class SaleOrder
         	// If the value of the totalOrderPrice is larger than the customer's required purchase threshold then execute this section
         	if(totalOrderPrice > customer.getPurchaseThreshhold())
         	{
-        		// Subtracts the costs of the usual freight charges from the value of the totalOrderPrice variable
-        		totalOrderPrice = applyFreeFreightCharge(totalOrderPrice);
+        		// Subtracts 10% of the sale order's total price
+        		totalOrderPrice = applyClubMemberDiscount(totalOrderPrice);
         	}
         }
          
@@ -304,8 +304,8 @@ public class SaleOrder
         	// If the value of the totalOrderPrice is larger than the customer's required purchase threshold then execute this section
         	if(totalOrderPrice > customer.getPurchaseThreshhold())
         	{
-        		// Subtracts 10% of the sale order's total price
-        		totalOrderPrice = applyClubMemberDiscount(totalOrderPrice);
+        		// Subtracts the costs of the usual freight charges from the value of the totalOrderPrice variable
+        		totalOrderPrice = applyFreeFreightCharge(totalOrderPrice);
         	}
         }
         

@@ -19,7 +19,7 @@ import model.SaleOrderLine;
  * SaleOrderLines. A new instance should be made for each sale.
  * 
  * @author Lumière Schack, Anders Have & Christoffer Søndergaard
- * @version 13/03/2025 - 23:52
+ * @version 14/03/2025 - 00:02
  */
 public class SaleOrderController
 {
@@ -32,10 +32,8 @@ public class SaleOrderController
 	
     /**
      * Constructs a SaleOrderController and initializes necessary controllers.
-     * 
-     * @throws DataAccessException if database access fails.
      */
-	public SaleOrderController() throws DataAccessException
+	public SaleOrderController()
 	{
 		// Creates a productController
 		employeeController = new EmployeeController();

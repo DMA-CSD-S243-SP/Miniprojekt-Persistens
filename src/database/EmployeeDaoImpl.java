@@ -37,6 +37,7 @@ public interface EmployeeDaoImpl
 	 *                        up in the database.
 	 * @return A shallow clone of the Employee that has an id that matches the
 	 *         querry or NULL if no match is found.
+	 * @throws DataAccessException 
 	 */
-	public Employee findEmployeeById(String employeeId, boolean fullAssociation);
+	public Employee findEmployeeById(String employeeId, boolean fullAssociation) throws DataAccessException;
 }

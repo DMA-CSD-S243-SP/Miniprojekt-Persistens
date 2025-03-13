@@ -10,7 +10,7 @@ package model;
 public class Product 
 {
 
-    private static int productId;
+    private int productId;
     private String name;
     private double purchasePrice;
     private double salesPrice;
@@ -51,7 +51,7 @@ public class Product
      *
      * @param productId the new product ID
      */
-    private static void setProductId(int productId) 
+    private void setProductId(int productId) 
     {
         this.productId = productId;
     }

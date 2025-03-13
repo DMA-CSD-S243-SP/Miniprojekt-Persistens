@@ -81,7 +81,6 @@ public class CustomerDB implements CustomerDaoImpl
 				resultSet.getString("phoneNumber"), 
 				resultSet.getString("emailAddress"), 
 				resultSet.getBoolean("clubMember"), 
-				resultSet.getDouble("purchaseThreshhold"),  
 				resultSet.getString("country"), 
 				resultSet.getString("state"), 
 				resultSet.getString("city"), 

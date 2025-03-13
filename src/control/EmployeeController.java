@@ -34,7 +34,7 @@ public class EmployeeController
 	 * @throws SQLException 
 	 * @throws DataAccessException 
 	 */
-	public Employee findEmployeeById(String employeeId) throws SQLException, DataAccessException
+	public Employee findEmployeeById(int employeeId) throws SQLException, DataAccessException
 	{
 		EmployeeDaoImpl dao = new EmployeeDB();
 		return dao.findEmployeeById(employeeId, false);

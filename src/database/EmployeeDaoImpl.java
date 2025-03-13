@@ -39,5 +39,5 @@ public interface EmployeeDaoImpl
 	 *         querry or NULL if no match is found.
 	 * @throws DataAccessException 
 	 */
-	public Employee findEmployeeById(String employeeId, boolean fullAssociation) throws DataAccessException;
+	public Employee findEmployeeById(int employeeId, boolean fullAssociation) throws DataAccessException;
 }

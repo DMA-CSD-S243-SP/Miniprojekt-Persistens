@@ -59,10 +59,10 @@ public class EmployeeDB implements EmployeeDaoImpl
 
 
 	@Override
-	public Employee findEmployeeById(String employeeId, boolean fullAssociation) throws DataAccessException
+	public Employee findEmployeeById(int employeeId, boolean fullAssociation) throws DataAccessException
 	{
 		try {
-			findByEmployeeId.setString(1, employeeId);
+			findByEmployeeId.setInt(1, employeeId);
 			ResultSet resultSet = findByEmployeeId.executeQuery();
 			Employee em = null;
 			if(resultSet.next()) 
@@ -107,5 +107,5 @@ public class EmployeeDB implements EmployeeDaoImpl
 			em.add(buildObject(resultSet));
 		}
 		return em;
-	}	
+	}
 }

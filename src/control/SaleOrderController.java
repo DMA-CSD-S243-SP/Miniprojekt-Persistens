@@ -43,7 +43,7 @@ public class SaleOrderController
 
 	
     /**
-     * Starts a new sale order with default values.
+     * Creates a new SaleOrder instance with default values.
      */
 	public void startSaleOrder()
 	{

@@ -4,6 +4,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 import database.DataAccessException;
+import database.EmployeeDB;
+import database.EmployeeDaoImpl;
 import database.ProductDB;
 import database.ProductDaoImpl;
 import model.Product;
@@ -17,21 +19,7 @@ import model.Product;
  */
 public class ProductController
 {
-	private ProductDaoImpl productDB;
-	
-	public ProductController() throws DataAccessException
-	{
-		try 
-		{
-			productDB = new ProductDB();
-		} 
 		
-		catch (SQLException exception) 
-		{
-			throw new DataAccessException("Can't create ProductDB", exception);
-		}
-	}
-	
 	/**
 	 * this method returns a list of all products in the database
 	 * 
@@ -40,11 +28,12 @@ public class ProductController
 	 */
 	public List<Product> findAllProducts() throws DataAccessException, SQLException
 	{
-		return productDB.findAllProducts();
+		ProductDaoImpl dao = new ProductDB();
+		return dao.findAllProducts();
 	}
 	
 	/**
-	 * this method searched the databse for product object that match the search parameter
+	 * this method searched the database for product object that match the search parameter
 	 * 
 	 * @param productId
 	 * @return a product object that match the search parameter
@@ -52,6 +41,7 @@ public class ProductController
 	 */
 	public Product findProductById(int productId) throws SQLException, DataAccessException 
 	{
-		return productDB.findProductById(productId);
+		ProductDaoImpl dao = new ProductDB();
+		return dao.findProductById(productId);
 	}
 }

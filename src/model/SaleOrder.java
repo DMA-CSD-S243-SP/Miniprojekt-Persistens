@@ -42,7 +42,7 @@ public class SaleOrder
     	this.customer = customer;
     	this.employee = employee;
     	this.invoiceStatus = invoiceStatus;
-    	this.paymentDate = paymentDate;
+    	this.paymentDate = getPaymentDate();
     	this.createdDate = createdDate;
     	this.deliveryStatus = deliveryStatus;
     	this.deliveryDate = deliveryDate;
@@ -169,13 +169,13 @@ public class SaleOrder
 
     
     /**
-     * Retrieves the payment date.
+     * Retrieves the payment date, by retrieving the createdDate and adding 30 days on top.
      *
      * @return the payment date.
      */
     public LocalDate getPaymentDate()
     {
-        return paymentDate;
+        return this.createdDate.plusDays(30);
     }
 
     
@@ -321,7 +321,7 @@ public class SaleOrder
     public double applyClubMemberDiscount(double totalOrderPrice)
     {
     	// Subtracts the discountPercentage (10%) from the totalOrderPrice
-    	totalOrderPrice = (1.00 - discountPercentage) * totalOrderPrice;
+    	totalOrderPrice *= (1 - (discountPercentage / 100));
     	
         return totalOrderPrice;
     }

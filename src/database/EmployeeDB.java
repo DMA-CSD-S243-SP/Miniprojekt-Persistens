@@ -24,7 +24,8 @@ public class EmployeeDB implements EmployeeDaoImpl
 	private PreparedStatement findAllEmployee; 
 	private PreparedStatement findByEmployeeId;
 	
-	public EmployeeDB() throws SQLException {
+	public EmployeeDB() throws SQLException 
+	{
 		findAllEmployee = DBConnection.getInstance().getConnection()
 				.prepareStatement(FIND_ALL_QUERIES);
 		findByEmployeeId = DBConnection.getInstance().getConnection()
@@ -60,7 +61,8 @@ public class EmployeeDB implements EmployeeDaoImpl
 			}
 			return em;
 		} 
-		catch (SQLException e) {
+		catch (SQLException e) 
+		{
 			throw new DataAccessException("Could not find by id = " + employeeId, e);
 		}	
 		}
@@ -90,7 +92,8 @@ public class EmployeeDB implements EmployeeDaoImpl
 	private List<Employee> buildObjects(ResultSet resultSet) throws SQLException
 	{
 		List<Employee> em = new ArrayList<>();
-		while(resultSet.next()) {
+		while(resultSet.next()) 
+		{
 			em.add(buildObject(resultSet));
 		}
 		return em;

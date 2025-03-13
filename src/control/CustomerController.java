@@ -6,8 +6,6 @@ import java.util.List;
 import database.CustomerDB;
 import database.CustomerDaoImpl;
 import database.DataAccessException;
-import database.EmployeeDB;
-import database.EmployeeDaoImpl;
 import model.Customer;
 
 

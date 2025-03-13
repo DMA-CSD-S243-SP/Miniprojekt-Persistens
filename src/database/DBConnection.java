@@ -9,7 +9,7 @@ import java.sql.Statement;
 
 
 /**
- * TODO
+ * the connection point between the program and its database 
  * 
  * @author Anders Have
  * @version 13/03/2025 - 10:00
@@ -20,10 +20,10 @@ public class DBConnection
 	private static DBConnection dbConnection;
 	
 	private static final String driverClass = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-	private static final String dbName = "DMA_CSD_S243_10644781";
-	private static final String serverAddress = "127.0.0.1";
+	private static final String dbName = "DMA-CSD-S243_10644781";
+	private static final String serverAddress = "hildur.ucn.dk";
 	private static final int    serverPort = 1433;
-	private static final String userName = "DMA_CSD_S243_10644781";
+	private static final String userName = "DMA-CSD-S243_10644781";
 	private static final String password = "Password1!";
 	
 	
@@ -49,7 +49,7 @@ public class DBConnection
 		}
 	}
 	
-	public static DBConnection getInstance() 
+	public static DBConnection getInstance() throws DataAccessException
 	{
 		if(dbConnection == null) 
 		{
@@ -128,5 +128,5 @@ public class DBConnection
 		{
 			e.printStackTrace();
 		}
-	}
+	} 
 }

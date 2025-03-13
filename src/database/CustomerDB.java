@@ -16,7 +16,7 @@ import model.Customer;
  */
 public class CustomerDB implements CustomerDaoImpl
 {
-	private static final String FIND_ALL_QUERIES = "SELECT firstName, lastName, customerType, phoneNumber, emailAddress, clubMember, purchaseThreshhold, country, state,"
+	private static final String FIND_ALL_QUERIES = "SELECT customerId, firstName, lastName, customerType, phoneNumber, emailAddress, clubMember, purchaseThreshhold, country, state,"
 			+ "postalCode, streetName, houseNumber, floorNumber, doorNumber from Customer";
 	private static final String FIND_ALL_CUSTOMEREMAIL_QUERY = FIND_ALL_QUERIES + "where emailAddress = ?";
 	
@@ -75,6 +75,7 @@ public class CustomerDB implements CustomerDaoImpl
 	private Customer buildObject(ResultSet resultSet) throws SQLException 
 	{
 		Customer c = new Customer(
+				resultSet.getInt("customerId"),
 				resultSet.getString("firstName"), 
 				resultSet.getString("lastName"), 
 				resultSet.getString("customerType"), 

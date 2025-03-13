@@ -28,7 +28,7 @@ public class ProductController
 		
 		catch (SQLException exception) 
 		{
-			throw new DataAccessException("Can't create GroupDB", exception);
+			throw new DataAccessException("Can't create ProductDB", exception);
 		}
 	}
 	

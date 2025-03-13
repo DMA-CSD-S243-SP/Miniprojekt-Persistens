@@ -365,6 +365,31 @@ public class SaleOrder
     {
     	// Used to calculate the subTotal price of all the products
     	double subTotal = 0.00;
+    
+    	System.out.println("");
+    	System.out.println("");
+    	System.out.println("");
+    	System.out.println("");
+    	System.out.println("");
+    	System.out.println("");
+    	System.out.println("");
+    	System.out.println("");
+    	System.out.println("");
+    	System.out.println("");
+    	System.out.println("");
+    	System.out.println("");
+    	System.out.println("");
+    	System.out.println("");
+    	System.out.println("");
+    	System.out.println("");
+    	System.out.println("");
+    	System.out.println("");
+    	System.out.println("");
+    	System.out.println("");
+    	System.out.println("");
+    	System.out.println("");
+    	System.out.println("");
+    	System.out.println("");
     	
     	System.out.println("Ordreoplysninger ");
     	System.out.println("--------------------------------");
@@ -440,6 +465,9 @@ public class SaleOrder
     	System.out.println("Betalingsstatus: " + invoiceStatus);
     	System.out.println("");
     	System.out.println("");
+    	System.out.println("");
+    	System.out.println("");
+    	System.out.println("");
     }
     
     
@@ -471,8 +499,6 @@ public class SaleOrder
 		+ getCustomer().getHouseNumber() + " "	
 		+ getCustomer().getFloorNumber() + " "	
     	+ getCustomer().getDoorNumber() + " ");
-    	System.out.println("");
-    	System.out.println("");
     	System.out.println("");
     	System.out.println("");
     	

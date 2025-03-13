@@ -5,7 +5,7 @@ package model;
  * and minimum stock. 
  * 
  * @author Line Bertelsen
- * @date 12.03.2025 - 17:59
+ * @date 12.03.2025 - 13.15
  */
 public class Product 
 {
@@ -16,7 +16,6 @@ public class Product
     private double salesPrice;
     private String countryOfOrigin;
     private int minStock;
-    private int refill;
 
     /**
      * Constructs a new Product with the specified attributes.

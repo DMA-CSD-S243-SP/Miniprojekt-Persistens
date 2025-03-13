@@ -56,7 +56,7 @@ public class Product
 	 *
 	 * @param productId the new product ID
 	 */
-	private void setProductId(int productId)
+	public void setProductId(int productId)
 	{
 		this.productId = productId;
 	}

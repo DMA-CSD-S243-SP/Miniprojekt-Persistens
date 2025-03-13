@@ -38,7 +38,7 @@ public class ProductController
 	 * @return returns a list of all Products objects
 	 * @throws DataAccessException
 	 */
-	public List<Product> findAllProducts() throws DataAccessException 
+	public List<Product> findAllProducts() throws DataAccessException, SQLException
 	{
 		return productDB.findAllProducts();
 	}
@@ -50,7 +50,7 @@ public class ProductController
 	 * @return a product object that match the search parameter
 	 * @throws DataAccessException
 	 */
-	public Product findProductById(int productId) throws DataAccessException 
+	public Product findProductById(int productId) throws SQLException, DataAccessException 
 	{
 		return productDB.findProductById(productId);
 	}

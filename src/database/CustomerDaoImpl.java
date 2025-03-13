@@ -14,7 +14,5 @@ public interface CustomerDaoImpl
 {
 	List<Customer> findAllCustomers() throws DataAccessException;
 	Customer findCustomerByEmail(String customerEmail) throws DataAccessException;
-
-
 }
 

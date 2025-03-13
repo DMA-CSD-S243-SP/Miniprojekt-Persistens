@@ -1,10 +1,13 @@
-package Controller;
+package control;
 
 import java.sql.SQLException;
 import java.util.List;
 
 import database.CustomerDB;
+import database.CustomerDaoImpl;
 import database.DataAccessException;
+import database.EmployeeDB;
+import database.EmployeeDaoImpl;
 import model.Customer;
 
 
@@ -17,30 +20,16 @@ import model.Customer;
 public class CustomerController 
 {
 
-	private CustomerDB CDB;
-
-
 	/**
 	 * this method returns a list of all Customer objects in the database. 
 	 * 
 	 * @return returns a list of all Customer objects
 	 * @throws DataAccessException 
 	 */
-	public CustomerController() throws DataAccessException 
+	public List<Customer> findAllCustomers() throws DataAccessException, SQLException
 	{
-	try 
-	{
-		CDB = new CustomerDB();
-	} catch (SQLException e) 
-	{
-		throw new DataAccessException("Can't create GroupDB", e);
-	}
-	}
-	
-	
-	public List<Customer> findAllCustomers() throws DataAccessException
-	{
-		return CDB.findAllCustomers();
+		CustomerDaoImpl dao = new CustomerDB();
+		return dao.findAllCustomers();
 	}
 	
 	
@@ -52,10 +41,12 @@ public class CustomerController
 	 * 
 	 * @return a customer object that  matches the search parameter
 	 * @throws DataAccessException
+	 * @throws SQLException 
 	 */
-	public Customer findCustomerByEmail(String customerEmail) throws DataAccessException
+	public Customer findCustomerByEmail(String customerEmail) throws DataAccessException, SQLException
 	{
-		return CDB.findCustomerByEmail(customerEmail);
+		CustomerDaoImpl dao = new CustomerDB();
+		return dao.findCustomerByEmail(customerEmail);
 	
 	}
 }

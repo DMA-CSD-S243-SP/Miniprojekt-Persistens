@@ -20,21 +20,23 @@ public class CustomerDB implements CustomerDaoImpl
 			+ "postalCode, streetName, houseNumber, floorNumber, doorNumber from Customer";
 	private static final String FIND_ALL_CUSTOMEREMAIL_QUERY = FIND_ALL_QUERIES + "where emailAddress = ?";
 	
-	private PreparedStatement findAll; 
+	private PreparedStatement findAllCustomer; 
 	private PreparedStatement findByCustomerEmail;
 	
 	public CustomerDB() throws SQLException {
-		findAll = DBConnection.getInstance().getConnection()
+		findAllCustomer = DBConnection.getInstance().getConnection()
 				.prepareStatement(FIND_ALL_QUERIES);
 		findByCustomerEmail = DBConnection.getInstance().getConnection()
 				.prepareStatement(FIND_ALL_CUSTOMEREMAIL_QUERY);
 	}
+	
+	
 	@Override
 	public List<Customer> findAllCustomers() throws DataAccessException 
 	{
 		try 
 		{
-			ResultSet resultSet = findAll.executeQuery();
+			ResultSet resultSet = findAllCustomer.executeQuery();
 			List<Customer> res = buildObjects(resultSet);
 			return res;
 		} catch (SQLException e) 
@@ -43,11 +45,12 @@ public class CustomerDB implements CustomerDaoImpl
 		}
 	}
 
+	
 	@Override
 	public Customer findCustomerByEmail(String customerEmail) throws DataAccessException 
 	{
 		try {
-			findByCustomerEmail.setInt(0, 0);
+			findByCustomerEmail.setString(1, customerEmail);
 			ResultSet resultSet = findByCustomerEmail.executeQuery();
 			Customer c = null;
 			if(resultSet.next()) 
@@ -61,11 +64,12 @@ public class CustomerDB implements CustomerDaoImpl
 		}	
 		}
 
+	
 	/**
-	 * 
+	 * builds a specific customer with data proviced by database
 	 * 
 	 * @param resultSet
-	 * @return returns a Custoemr object with the specified variables from resultSet
+	 * @return returns a Customer object with the specified variables from resultSet
 	 * @throws SQLException
 	 */
 	private Customer buildObject(ResultSet resultSet) throws SQLException 
@@ -92,10 +96,10 @@ public class CustomerDB implements CustomerDaoImpl
 	
 	
 	/**
-	 * 
+	 * asks buildObject to create all Customers and adds them to a List
 	 * 
 	 * @param resultSet
-	 * @return Customer objects for all Customers in the database
+	 * @return List of Customer objects for all Customers in the database
 	 * @throws SQLException
 	 */
 	private List<Customer> buildObjects(ResultSet resultSet) throws SQLException 

@@ -42,10 +42,10 @@ public class SaleOrder
     	this.customer = customer;
     	this.employee = employee;
     	this.invoiceStatus = invoiceStatus;
-    	this.paymentDate = getPaymentDate();
     	this.createdDate = createdDate;
     	this.deliveryStatus = deliveryStatus;
-    	this.deliveryDate = deliveryDate;
+    	this.deliveryDate = getDeliveryDate();
+    	this.paymentDate = getPaymentDate();
     	this.saleOrderLineList = new ArrayList<>();
 
     	// Adds +1 to the value of orderID
@@ -211,6 +211,28 @@ public class SaleOrder
         this.createdDate = createdDate;
     }
 
+    
+    /**
+     * Retrieves the delivery date, by retrieving the createdDate and adding 7 days to it.
+     *
+     * @return the payment date.
+     */
+    public LocalDate getDeliveryDate()
+    {
+        return this.createdDate.plusDays(7);
+    }
+
+    
+    /**
+     * Sets the payment date.
+     *
+     * @param paymentDate the payment date to be set.
+     */
+    public void setDeliveryDate(LocalDate deliveryDate)
+    {
+        this.deliveryDate = deliveryDate;
+    }
+    
     
     /**
      * Retrieves the delivery status of the sale order.
@@ -454,15 +476,14 @@ public class SaleOrder
     	System.out.println("");
     	System.out.println("");
     	
+    	
+    	
     	System.out.println("Varer: ");
         
         // Iterates / loops through all of the saleOrderLines
         for (SaleOrderLine saleOrderLine : saleOrderLineList)
         {
         	System.out.println(saleOrderLine.getQuantity() + "x " + saleOrderLine.getProduct().getName() + " :    " + saleOrderLine.getProduct().getSalesPrice());
-        	
-        	// Adds the total price of a saleOrderLine to the totalOrderPrice variable
-            totalOrderPrice += saleOrderLine.getSaleOrderLineTotalPrice();
         }
 
         // If the customer is a club member then execute this section

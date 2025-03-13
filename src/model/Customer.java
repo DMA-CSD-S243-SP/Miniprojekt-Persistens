@@ -12,6 +12,7 @@ package model;
  */
 public class Customer
 {
+	private int customerNumber;
 	private String firstName;
 	private String lastName;
 	private String customerType;
@@ -47,10 +48,11 @@ public class Customer
 	 * @param floorNumber        The floor number in case of an apartment.
 	 * @param doorNumber         The specific door number or unit identifier.
 	 */
-	public Customer(String firstName, String lastName, String customerType, String phoneNumber, String emailAddress,
+	public Customer(int customerNumber, String firstName, String lastName, String customerType, String phoneNumber, String emailAddress,
 			boolean clubMember, String country, String state, String city, int postalCode,
 			String streetName, int houseNumber,	int floorNumber, String doorNumber)
 	{
+		this.customerNumber = customerNumber;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.customerType = customerType;
@@ -71,6 +73,28 @@ public class Customer
 		this.purchaseThreshhold = getPurchaseThreshhold();
 	}
 
+	
+	/**
+	 * Gets the customer's id number.
+	 *
+	 * @return The customer's uniquely identifiable customer id / customer number.
+	 */
+	public int getCustomerNumber()
+	{
+		return customerNumber;
+	}
+
+	
+	/**
+	 * Sets the customer's postal code.
+	 *
+	 * @param customerNumber The customer's uniquely identifiable customer id / customer number.
+	 */
+	public void setCustomerNumber(int customerNumber)
+	{
+		this.customerNumber = customerNumber;
+	}
+	
 	
 	/**
 	 * Gets the customer's first name.

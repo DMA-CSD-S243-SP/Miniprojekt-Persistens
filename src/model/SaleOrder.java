@@ -11,7 +11,7 @@ import java.util.List;
  * order status, and the list of sale order lines.
  * 
  * @author Christoffer Søndergaard
- * @date 13.03.2025 - 11:25
+ * @date 13.03.2025 - 14:04
  */
 public class SaleOrder
 {
@@ -334,6 +334,7 @@ public class SaleOrder
     {
         totalOrderPrice = getTotalOrderPrice();
    
+        printSaleOrder();
         printInvoice();
     }
 

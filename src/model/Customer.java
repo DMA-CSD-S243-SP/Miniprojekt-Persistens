@@ -38,7 +38,6 @@ public class Customer
 	 * @param phoneNumber        The customer's phone number.
 	 * @param emailAddress       The customer's email address.
 	 * @param clubMember         Whether the customer is a club member.
-	 * @param purchaseThreshhold The threshold for purchases.
 	 * @param country            The customer's country.
 	 * @param state              The customer's state or province.
 	 * @param city               The customer's city.
@@ -49,7 +48,7 @@ public class Customer
 	 * @param doorNumber         The specific door number or unit identifier.
 	 */
 	public Customer(String firstName, String lastName, String customerType, String phoneNumber, String emailAddress,
-			boolean clubMember, double purchaseThreshhold, String country, String state, String city, int postalCode,
+			boolean clubMember, String country, String state, String city, int postalCode,
 			String streetName, int houseNumber,	int floorNumber, String doorNumber)
 	{
 		this.firstName = firstName;
@@ -58,7 +57,6 @@ public class Customer
 		this.phoneNumber = phoneNumber;
 		this.emailAddress = emailAddress;
 		this.clubMember = clubMember;
-		this.purchaseThreshhold = purchaseThreshhold;
 		this.country = country;
 		this.state = state;
 		this.city = city;
@@ -67,6 +65,10 @@ public class Customer
 		this.houseNumber = houseNumber;
 		this.floorNumber = floorNumber;
 		this.doorNumber = doorNumber;
+		
+		
+		
+		this.purchaseThreshhold = getPurchaseThreshhold();
 	}
 
 	
@@ -174,7 +176,7 @@ public class Customer
 	 *
 	 * @return True if the customer is a club member, otherwise false.
 	 */
-	public boolean getClubMember()
+	public boolean isClubMember()
 	{
 		return clubMember;
 	}
@@ -192,13 +194,28 @@ public class Customer
 
 	
 	/**
-	 * Gets the purchase threshold.
+	 * Gets the purchase threshold required for a customer to purchase
+	 * goods for, in order to receive order perks.
 	 *
-	 * @return The purchase threshold.
+	 * @return The purchase threshold, 1500 for club members and 2500 for private customers.
 	 */
 	public double getPurchaseThreshhold()
 	{
-		return purchaseThreshhold;
+		// If the customer instance is a club member then execute this section
+		if(isClubMember() == true)
+		{
+			// Sets the purchase threshold to 1500
+			setPurchaseThreshhold(1500.00);
+		}
+		
+		// If the customer instance is not a club member then execute this section
+		else
+		{
+			// Sets the purchase threshold to 2500
+			setPurchaseThreshhold(2500.00);
+		}
+		
+		return this.purchaseThreshhold;
 	}
 
 	

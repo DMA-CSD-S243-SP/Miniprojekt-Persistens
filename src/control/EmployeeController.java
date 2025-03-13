@@ -11,7 +11,9 @@ import model.Employee;
 /**
  * Controller for creating, reading, updating, and deleting Employees.
  * 
- * @author Lumière Schack
+ * @author Lumière Schack & Christoffer Søndergaard
+ * @date 14.03.2025 - 00:01
+ */
  */
 public class EmployeeController
 {
@@ -21,7 +23,7 @@ public class EmployeeController
 	 * @throws DataAccessException 
 	 * @throws SQLException 
 	 */
-	public List<Employee> findAllCustomers() throws DataAccessException, SQLException
+	public List<Employee> findAllEmployees() throws DataAccessException, SQLException
 	{
 		EmployeeDaoImpl dao = new EmployeeDB();
 		return dao.findAllEmployees(false);

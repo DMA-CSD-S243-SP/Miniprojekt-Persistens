@@ -4,11 +4,11 @@ package model;
 /**
  * Represents a customer with personal and purchase-related information. This
  * class stores details such as name, contact info, address, membership status,
- * and purchase-related attributes like discount percentage and freight charges.
+ * and purchase-related attributes like purchase threshold.
  * 
  * 
  * @author Christoffer Søndergaard, Anders Have & Line Bertelsen
- * @version 12/03/2025 - 16:33
+ * @version 13/03/2025 - 07:23
  */
 public class Customer
 {
@@ -19,8 +19,6 @@ public class Customer
 	private String emailAddress;
 	private boolean clubMember;
 	private double purchaseThreshhold;
-	private double freightCharge;
-	private double discountPercentage;
 	private String country;
 	private String state;
 	private String city;
@@ -41,8 +39,6 @@ public class Customer
 	 * @param emailAddress       The customer's email address.
 	 * @param clubMember         Whether the customer is a club member.
 	 * @param purchaseThreshhold The threshold for purchases.
-	 * @param freightCharge      The cost of freight for this customer.
-	 * @param discountPercentage The discount percentage applicable to the customer.
 	 * @param country            The customer's country.
 	 * @param state              The customer's state or province.
 	 * @param city               The customer's city.
@@ -53,9 +49,8 @@ public class Customer
 	 * @param doorNumber         The specific door number or unit identifier.
 	 */
 	public Customer(String firstName, String lastName, String customerType, String phoneNumber, String emailAddress,
-			boolean clubMember, double purchaseThreshhold, double freightCharge, double discountPercentage,
-			String country, String state, String city, int postalCode, String streetName, int houseNumber,
-			int floorNumber, String doorNumber)
+			boolean clubMember, double purchaseThreshhold, String country, String state, String city, int postalCode,
+			String streetName, int houseNumber,	int floorNumber, String doorNumber)
 	{
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -64,8 +59,6 @@ public class Customer
 		this.emailAddress = emailAddress;
 		this.clubMember = clubMember;
 		this.purchaseThreshhold = purchaseThreshhold;
-		this.freightCharge = freightCharge;
-		this.discountPercentage = discountPercentage;
 		this.country = country;
 		this.state = state;
 		this.city = city;
@@ -217,50 +210,6 @@ public class Customer
 	public void setPurchaseThreshhold(double purchaseThreshhold)
 	{
 		this.purchaseThreshhold = purchaseThreshhold;
-	}
-
-	
-	/**
-	 * Gets the freight charge.
-	 *
-	 * @return The freight charge.
-	 */
-	public double getFreightCharge()
-	{
-		return freightCharge;
-	}
-
-	
-	/**
-	 * Sets the freight charge.
-	 *
-	 * @param freightCharge The freight charge to set.
-	 */
-	public void setFreightCharge(double freightCharge)
-	{
-		this.freightCharge = freightCharge;
-	}
-
-	
-	/**
-	 * Gets the discount percentage.
-	 *
-	 * @return The discount percentage.
-	 */
-	public double getDiscountPercentage()
-	{
-		return discountPercentage;
-	}
-
-	
-	/**
-	 * Sets the discount percentage.
-	 *
-	 * @param discountPercentage The discount percentage to set.
-	 */
-	public void setDiscountPercentage(double discountPercentage)
-	{
-		this.discountPercentage = discountPercentage;
 	}
 
 	
@@ -438,4 +387,32 @@ public class Customer
 	{
 		this.doorNumber = doorNumber;
 	}
+	
+	
+    /**
+     * Returns a string representation of the Customer object.
+     *
+     * @return A string containing all relevant details of the customer.
+     */
+    @Override
+    public String toString()
+    {
+        return "Customer [" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", customerType='" + customerType + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", emailAddress='" + emailAddress + '\'' +
+                ", clubMember=" + clubMember +
+                ", purchaseThreshhold=" + purchaseThreshhold +
+                ", country='" + country + '\'' +
+                ", state='" + state + '\'' +
+                ", city='" + city + '\'' +
+                ", postalCode=" + postalCode +
+                ", streetName='" + streetName + '\'' +
+                ", houseNumber=" + houseNumber +
+                ", floorNumber=" + floorNumber +
+                ", doorNumber='" + doorNumber + '\'' +
+                ']';
+    }
 }

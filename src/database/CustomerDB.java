@@ -9,7 +9,11 @@ import java.util.List;
 import model.Customer;
 
 /**
- * TODO
+ *  This class is responsible for accessing 
+ * and managing customer objects stored in a database.
+ * 
+ * It implements the customerDapImpl, 
+ * meaning its implements its methods
  * 
  * @author Anders Have
  * @version 13/03/2025 - 13:35

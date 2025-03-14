@@ -44,8 +44,8 @@ public class SaleOrder
     	this.invoiceStatus = invoiceStatus;
     	this.createdDate = createdDate;
     	this.deliveryStatus = deliveryStatus;
-    	this.deliveryDate = getDeliveryDate();
-    	this.paymentDate = getPaymentDate();
+    	this.deliveryDate = deliveryDate;
+    	this.paymentDate = paymentDate;
     	this.saleOrderLineList = new ArrayList<>();
 
     	// Adds +1 to the value of orderID

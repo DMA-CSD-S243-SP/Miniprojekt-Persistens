@@ -98,16 +98,16 @@ public class CustomerDB implements CustomerDaoImpl
 	private Customer buildObject(ResultSet resultSet) throws SQLException 
 	{
 		Customer c = new Customer(
-				resultSet.getInt("customerId"),
+				resultSet.getInt("id"),
 				resultSet.getString("firstName"), 
 				resultSet.getString("lastName"), 
-				resultSet.getString("customerType"), 
+				/*resultSet.getString("customerType")*/ null, 
 				resultSet.getString("phoneNumber"), 
 				resultSet.getString("emailAddress"), 
-				resultSet.getBoolean("clubMember"), 
-				resultSet.getString("country"), 
-				resultSet.getString("state"), 
-				resultSet.getString("city"), 
+				/*resultSet.getBoolean("clubMember")*/ false, 
+				/*resultSet.getString("country")*/ null, 
+				resultSet.getString("stateName"), 
+				/*resultSet.getString("city")*/ null, 
 				resultSet.getInt("postalCode"), 
 				resultSet.getString("streetName"), 
 				resultSet.getInt("houseNumber"), 

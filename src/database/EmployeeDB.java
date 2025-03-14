@@ -85,15 +85,15 @@ public class EmployeeDB implements EmployeeDaoImpl
 	private Employee buildObject(ResultSet resultSet) throws SQLException
 		{
 			Employee em = new Employee(
-					resultSet.getInt("employeeId"),
+					resultSet.getInt("id"),
 					resultSet.getString("firstName"),
 					resultSet.getString("lastName"),
 					resultSet.getString("title"),
 					resultSet.getString("phoneNumber"),
 					resultSet.getString("emailAddress"),
-					resultSet.getString("country"),
-					resultSet.getString("state"),
-					resultSet.getString("city"),
+					/*resultSet.getString("country")*/ null,
+					resultSet.getString("stateName"),
+					/*resultSet.getString("city")*/ null,
 					resultSet.getInt("postalCode"),
 					resultSet.getString("streetName"),
 					resultSet.getInt("houseNumber"),

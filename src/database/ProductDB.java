@@ -30,12 +30,12 @@ public class ProductDB implements ProductDaoImpl
 {
 	//It select all columns (personId, name, email, adress_id) from the person table
 	private static final String FIND_ALL_QUERIES = 
-		"select productId, name, purchasePrice, salesPrice, countryOfOrigin, minStock from product";
+		"select id, name, purchasePrice, salesPrice, countryOfOrigin, minStock from product";
 	
 	//It builds upon the FIND_ALL_QUERY which filters by 'productId' (productId)
 	//The ? is a placeholder for a value that will be inserted later
 	private static final String FIND_ALL_PRODUCTID_QUERY = 
-			FIND_ALL_QUERIES + " where productId = ?"; 
+			FIND_ALL_QUERIES + " where id = ?"; 
 	
 	//Instance variables
 	//This prepared statement store the compiled SQL queries
@@ -112,7 +112,7 @@ public class ProductDB implements ProductDaoImpl
 	private Product buildObject(ResultSet resultSet) throws SQLException 
 	{
 		Product product = new Product(
-				resultSet.getInt("productId"),
+				resultSet.getInt("id"),
 				resultSet.getString("name"),
 				resultSet.getDouble("purchasePrice"),
 				resultSet.getDouble("salesPrice"),

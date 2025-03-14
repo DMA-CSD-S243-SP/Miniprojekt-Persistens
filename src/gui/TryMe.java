@@ -28,30 +28,6 @@ public class TryMe
 	
     public static void main(String[] args)
     {
-    	// Create Products
-        Product product1 = new Product(1, "Cowboyhat - Sandfarvet", 200.00, 250.00, "USA", 20);
-        Product product2 = new Product(2, "Cowboyhat - Krokodilleskind", 225.00, 251.00, "USA", 20);
-        Product product3 = new Product(3, "Cowboyhat - Mørk", 120.00, 200.00, "USA", 20);
-        Product product4 = new Product(4, "Cowboyhat - Enhjørningskind", 225.00, 1500.00, "USA", 20);
-        Product product5 = new Product(5, "Realistisk Revolver - 50 caliber", 50.00, 750.00, "Ungarn", 15);
-        Product product6 = new Product(6, "Cowboystøvler - Brunt Læder", 90.00, 251.00, "Polen", 30);
-        Product product7 = new Product(7, "Cowboystøvler - Sort Læder", 90.00, 500.00, "Polen", 30);
-        Product product8 = new Product(8, "Hælsporre", 40.00, 200.00, "Ungarn", 30);
-        Product product9 = new Product(9, "Buffaloslips", 60.00, 100.00, "USA", 40);
-    	
-    	// Create Employees
-    	Employee employee1 = new Employee(1000, "Jens", "Hansen", "Manager", "12345678", "jens@example.com", "Danmark", "Hovedstaden", "København", 1000, "Strøget", 10, 2, "A");
-        Employee employee2 = new Employee(1001, "Marie", "Nielsen", "Ekspedient", "87654321", "marie@example.com", "Danmark", "Midtjylland", "Aarhus", 8000, "Åboulevarden", 20, 3, "B");
-    	Employee employee3 = new Employee(1002, "Anders", "Larsen", "Ekspedient", "11223344", "anders@example.com", "Danmark", "Syddanmark", "Odense", 5000, "Vestergade", 5, 1, "C");
-
-    	// Create Customers
-    	Customer customer1 = new Customer(101, "Mikkel", "Poulsen", "Regular", "22334455", "mikkel@example.com", true, "Danmark", "Hovedstaden", "Frederiksberg", 2000, "Gammel Kongevej", 15, 1, "1A");
-        Customer customer2 = new Customer(102, "Sofie", "Jørgensen", "VIP", "33445566", "sofie@example.com", true, "Danmark", "Nordjylland", "Aalborg", 9000, "Boulevarden", 25, 2, "2B");
-    	Customer customer3 = new Customer(103, "Rasmus", "Madsen", "Business", "44556677", "rasmus@example.com", false, "Danmark", "Sjælland", "Roskilde", 4000, "Algade", 30, 4, "3C");
-
-    	
-    	
-    	
     	// Creates the lists we use to hold our different objects within
     	List<Employee> employeeList = new ArrayList<>();
     	List<Customer> customerList = new ArrayList<>();
@@ -95,7 +71,7 @@ public class TryMe
     	
     	try
 		{
-    		employee = saleOrderController.selectEmployeeById(employee1.getEmployeeId());
+    		employee = saleOrderController.selectEmployeeById(1);
 		}
     	
 		// Attempts to catch exceptions of the DataAccessException type
@@ -117,7 +93,7 @@ public class TryMe
     	// Step: 4
     	try
 		{
-    		saleOrderController.setEmployeeToSaleOrder(employee.getEmployeeId());
+    		saleOrderController.setEmployeeToSaleOrder(1000);
 		}
     	
 		// Attempts to catch exceptions of the DataAccessException type
@@ -165,7 +141,7 @@ public class TryMe
     	
     	try
 		{
-    		customer = saleOrderController.selectCustomerByEmail(customer1.getEmailAddress());
+    		customer = saleOrderController.selectCustomerByEmail("mikkel@example.com");
 		}
     	
 		// Attempts to catch exceptions of the DataAccessException type
@@ -242,7 +218,7 @@ public class TryMe
     	
     	try
 		{
-    		product = saleOrderController.selectProductById(product.getProductId());
+    		product = saleOrderController.selectProductById(1);
 		}
     	
 		// Attempts to catch exceptions of the DataAccessException type

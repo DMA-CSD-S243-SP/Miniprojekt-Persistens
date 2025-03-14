@@ -1,5 +1,6 @@
 package database;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,9 +24,9 @@ public class EmployeeDB implements EmployeeDaoImpl
 {
 	// this selects all the colums in the employee tabel
 	private static final String FIND_ALL_QUERIES = "SELECT employeeId, firstName, lastName, title, phoneNumber, emailAddress, streetName,"
-			+ "streetName, houseNumber, floorNumber, doorNumber, stateName, postalCode from employee";
+			+ "streetName, houseNumber, floorNumber, doorNumber, stateName, postalCode from Employee";
 	// this builds on FIND_ALL_QUERIES by adding a filter and a placeholder.
-	private static final String FIND_ALL_EMPLOYEEID_QUERY = FIND_ALL_QUERIES + "where employeeId = ?";
+	private static final String FIND_ALL_EMPLOYEEID_QUERY = FIND_ALL_QUERIES + " where employeeId = ?";
 	
 	private PreparedStatement findAllEmployee; 
 	private PreparedStatement findByEmployeeId;
@@ -46,8 +47,10 @@ public class EmployeeDB implements EmployeeDaoImpl
 	@Override
 	public List<Employee> findAllEmployees(boolean fullAssociation) throws DataAccessException
 	{
+		Connection con = DBConnection.getInstance().getConnection();
 		try 
 		{
+			findAllEmployee = con.prepareStatement(FIND_ALL_QUERIES);
 			ResultSet resultSet = findAllEmployee.executeQuery();
 			List<Employee> res = buildObjects(resultSet);
 			return res;
@@ -61,7 +64,9 @@ public class EmployeeDB implements EmployeeDaoImpl
 	@Override
 	public Employee findEmployeeById(int employeeId, boolean fullAssociation) throws DataAccessException
 	{
+		Connection con = DBConnection.getInstance().getConnection();
 		try {
+			findByEmployeeId = con.prepareStatement(FIND_ALL_EMPLOYEEID_QUERY);
 			findByEmployeeId.setInt(1, employeeId);
 			ResultSet resultSet = findByEmployeeId.executeQuery();
 			Employee em = null;

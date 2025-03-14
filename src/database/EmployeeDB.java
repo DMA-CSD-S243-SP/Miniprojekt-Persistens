@@ -23,10 +23,10 @@ import model.Employee;
 public class EmployeeDB implements EmployeeDaoImpl 
 {
 	// this selects all the colums in the employee tabel
-	private static final String FIND_ALL_QUERIES = "SELECT employeeId, firstName, lastName, title, phoneNumber, emailAddress, streetName,"
+	private static final String FIND_ALL_QUERIES = "SELECT id, firstName, lastName, title, phoneNumber, emailAddress, streetName,"
 			+ "streetName, houseNumber, floorNumber, doorNumber, stateName, postalCode from Employee";
 	// this builds on FIND_ALL_QUERIES by adding a filter and a placeholder.
-	private static final String FIND_ALL_EMPLOYEEID_QUERY = FIND_ALL_QUERIES + " where employeeId = ?";
+	private static final String FIND_ALL_EMPLOYEEID_QUERY = FIND_ALL_QUERIES + " where id = ?";
 	
 	private PreparedStatement findAllEmployee; 
 	private PreparedStatement findByEmployeeId;

@@ -1,8 +1,3 @@
-create database [DMA-CSD-S243_10644781];
-go
-
-use [DMA-CSD-S243_10644781];
-go
 
 create table Country
 (

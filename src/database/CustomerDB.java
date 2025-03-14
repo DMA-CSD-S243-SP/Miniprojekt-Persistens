@@ -1,5 +1,6 @@
 package database;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,7 +25,7 @@ public class CustomerDB implements CustomerDaoImpl
 	private static final String FIND_ALL_QUERIES = "SELECT emailAddress, id, firstName, lastName, title, phoneNumber, streetNumber, houseNumber, floorNumber,"
 			+ " doorNumber, stateName, postalCode from Customer";
 	// this builds on FIND_ALL_QUERIES by adding a filter with a placeholder 
-	private static final String FIND_ALL_CUSTOMEREMAIL_QUERY = FIND_ALL_QUERIES + "where emailAddress = ?";
+	private static final String FIND_ALL_CUSTOMEREMAIL_QUERY = FIND_ALL_QUERIES + " where emailAddress = ?";
 	
 	private PreparedStatement findAllCustomer; 
 	private PreparedStatement findByCustomerEmail;
@@ -43,8 +44,10 @@ public class CustomerDB implements CustomerDaoImpl
 	@Override
 	public List<Customer> findAllCustomers() throws DataAccessException 
 	{
+		Connection con = DBConnection.getInstance().getConnection();
 		try 
 		{
+			findAllCustomer = con.prepareStatement(FIND_ALL_QUERIES);
 			//executes the preparedstatement
 			ResultSet resultSet = findAllCustomer.executeQuery();
 			
@@ -64,7 +67,9 @@ public class CustomerDB implements CustomerDaoImpl
 	@Override
 	public Customer findCustomerByEmail(String customerEmail) throws DataAccessException 
 	{
+		Connection con = DBConnection.getInstance().getConnection();
 		try {
+			findByCustomerEmail = con.prepareStatement(FIND_ALL_CUSTOMEREMAIL_QUERY);
 			// adds the parameter to the String instead of the placeholder.
 			findByCustomerEmail.setString(1, customerEmail);
 			//executes the preparedstatement

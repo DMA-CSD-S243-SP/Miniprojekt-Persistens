@@ -63,7 +63,9 @@ public class ProductDB implements ProductDaoImpl
 	@Override
 	public List<Product> findAllProducts() throws DataAccessException 
 	{
+		Connection con = DBConnection.getInstance().getConnection();
 		try {
+			findAllProductPreparedStatement = con.prepareStatement(FIND_ALL_QUERIES);
 			ResultSet resultSet = findAllProductPreparedStatement.executeQuery();
 			List<Product> result = buildObjects(resultSet);
 			return result;
@@ -81,9 +83,10 @@ public class ProductDB implements ProductDaoImpl
 	@Override
 	public Product findProductById(int productId) throws DataAccessException 
 	{
-			
+		Connection con = DBConnection.getInstance().getConnection();
 		try 
 		{
+			findProducutByIdPrepratedStatement = con.prepareStatement(FIND_ALL_PRODUCTID_QUERY);
 			//setInt(1, productId) insert the productId parameter into the ? placeholder in FIND_BY_ID_QURIES
 			findProducutByIdPrepratedStatement.setInt(1, productId);
 			

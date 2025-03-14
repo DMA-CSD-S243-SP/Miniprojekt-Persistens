@@ -80,7 +80,7 @@ create table Employee
 	streetName varchar (30),
 	houseNumber int,
 	floorNumber int,
-	doorNumber int,
+	doorNumber varchar(15),
 	stateName varchar(30),
 	postalCode int,
 
@@ -98,7 +98,7 @@ create table Customer
 	streetName varchar (30),
 	houseNumber int,
 	floorNumber int,
-	doorNumber int,
+	doorNumber varchar(15),
 	stateName varchar(30),
 	postalCode int,
 
@@ -143,8 +143,8 @@ create table Product
 	minStock int not null,
 	salesPrice double precision not null,
 	purchasePrice double precision,
-	supplierId int not null,
-	stockKeepingUnitId int not null,
+	supplierId int,
+	stockKeepingUnitId int,
 
 	primary key (id),
 	constraint FK_Product_Supplier foreign key (supplierId) references Supplier(id),

@@ -323,12 +323,8 @@ public class SaleOrder
      */
     public double applyFreeFreightCharge(double totalOrderPrice)
     {
-    	// If the sale order's total price is above the 2500 purchase threshold then execute this section 
-    	if (totalOrderPrice > customer.getPurchaseThreshhold())
-    	{
-    		// Subtracts the 45.00 freight cost from the order's total price
-    		totalOrderPrice = totalOrderPrice - freightCharge;
-    	}
+		// Subtracts the 45.00 freight cost from the order's total price
+		totalOrderPrice = totalOrderPrice - freightCharge;
     	
     	return totalOrderPrice;
     }

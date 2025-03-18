@@ -20,7 +20,7 @@ public class SaleOrderDB implements SaleOrderDaoImpl
 {
 	// it inserts a new SaleOrder into the table with specified values
 	private static final String INSERTSALEORDER_QUERY = "INSERT into SaleOrder (orderId, customerId, invoiceNumber, "
-			+ "emailAddress, employeeId, createdDate, deliveryDate, deliveryStatus VALUES (? ? ? ? ? ? ? ?)";
+			+ "emailAddress, employeeId, createdDate, deliveryDate, deliveryStatus) VALUES (? ? ? ? ? ? ? ?)";
 	
 	private PreparedStatement insertSaleOrderToDatabasePreparedStatement;
 
@@ -40,7 +40,7 @@ public class SaleOrderDB implements SaleOrderDaoImpl
 	{
 		try
 		{
-		// fills the ?'s in the preparedStatement with the vlaues from the SaleOrder object 
+		// fills the ?'s in the preparedStatement with the values from the SaleOrder object 
 		insertSaleOrderToDatabasePreparedStatement.setInt(1, saleOrder.getOrderId());
 		insertSaleOrderToDatabasePreparedStatement.setInt(2, saleOrder.getCustomer().getCustomerNumber());
 		insertSaleOrderToDatabasePreparedStatement.setInt(3, saleOrder.getInvoiceNumber());

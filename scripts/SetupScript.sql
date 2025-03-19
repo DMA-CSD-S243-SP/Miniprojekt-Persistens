@@ -154,7 +154,7 @@ go
 
 create table SaleOrderLine
 (
-	id int not null,
+	id int identity(1,1),
 	productId int not null,
 	quantity int,
 	orderId int not null,

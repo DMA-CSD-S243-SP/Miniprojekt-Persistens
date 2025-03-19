@@ -306,6 +306,9 @@ public class SaleOrder
         // If the customer is not a club member then execute this section
         else
         {
+        	// Adds the cost value of freightCharge to the order's total price
+        	totalOrderPrice += freightCharge;
+        	
         	// If the value of the totalOrderPrice is larger than the customer's required purchase threshold then execute this section
         	if(totalOrderPrice > customer.getPurchaseThreshhold())
         	{

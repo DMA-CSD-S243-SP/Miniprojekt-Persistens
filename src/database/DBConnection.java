@@ -9,124 +9,241 @@ import java.sql.Statement;
 
 
 /**
- * the connection point between the program and its database 
+ * This class manages the connection between the program and the database.
+ * It follows a singleton pattern to ensure only one connection instance is used.
  * 
- * @author Anders Have
- * @version 13/03/2025 - 10:00
+ * @author Anders Have & Christoffer Søndergaard
+ * @version 19/03/2025 - 21:27
  */
-public class DBConnection 
+public class DBConnection
 {
+	// The database connection instance is initialized as null
 	private Connection connection = null;
+	
+	// The singleton instance of DBConnection is declared
 	private static DBConnection dbConnection;
-	
+
+	// Database driver class
 	private static final String driverClass = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
+	
+	// Name of the database
 	private static final String dbName = "DMA-CSD-S243_10644781";
+
+	// Address of the server
 	private static final String serverAddress = "hildur.ucn.dk";
-	private static final int    serverPort = 1433;
+
+	// Server port number
+	private static final int serverPort = 1433;
+	
+	// Database username
 	private static final String userName = "DMA-CSD-S243_10644781";
-	private static final String password = "Password1!";
 	
+	// Database password
+	private static final String password = "Passedword";
+
 	
-	private DBConnection() 
+    /**
+     * Private constructor that initializes the database connection.
+     */
+	private DBConnection()
 	{
-		String connectionString = String.format("jdbc:sqlserver://%s:%d;databaseName=%s;user=%s;password=%s;encrypt=false", 
-				serverAddress, serverPort, dbName, userName, password);
-		try 
+		 // Constructs the full database connection string
+		String connectionString = String.format("jdbc:sqlserver://%s:%d;databaseName=%s;user=%s;password=%s;encrypt=false", serverAddress, serverPort, dbName, userName, password);
+		
+		try
 		{
+			// Load the database driver class
 			Class.forName(driverClass);
+			
+			// Establishes connection to the database
 			connection = DriverManager.getConnection(connectionString);
-		} 
-		catch (ClassNotFoundException e) 
+		}
+		
+		catch (ClassNotFoundException exception)
 		{
-			System.err.println("Could not load JDBC driver");
-			e.printStackTrace();
-		} 
-		catch (SQLException e) 
+			// Error handling for missing JDBC driver
+			System.err.println("Unable to load the JDBC driver");
+			
+			exception.printStackTrace();
+		}
+		
+		catch (SQLException exception)
 		{
+			// Error handling for connection failure
 			System.err.println("Could not connect to database " + dbName + "@" + serverAddress + ":" + serverPort + " as user " + userName + " using password ******");
 			System.out.println("Connection string was: " + connectionString.substring(0, connectionString.length() - password.length()) + "....");
-			e.printStackTrace();
+			
+			exception.printStackTrace();
 		}
 	}
+
 	
+    /**
+     * Retrieves the singleton instance of DBConnection.
+     * 
+     * @return the singleton instance of DBConnection
+     */
 	public static DBConnection getInstance()
 	{
-		if(dbConnection == null) 
-		{
-			dbConnection = new DBConnection();
-		}
+	    // Checks if an instance of DBConnection already exists
+	    if (dbConnection == null) 
+	    {
+	        // If no instance exists, create a new DBConnection object
+	        dbConnection = new DBConnection();
+	    }
+	    
+	    // Returns the existing or newly created instance of DBConnection
 		return dbConnection;
 	}
 	
-	public void startTransaction() throws SQLException 
-	{
-		connection.setAutoCommit(false);
-	}
-	
-	public void rollbackTransaction() throws SQLException 
-	{
-		connection.rollback();
-		connection.setAutoCommit(true);
-	}
-	
-	public int executeInsertWithIdentity(PreparedStatement ps) throws SQLException  
-	{
-		int res = -1;
-		try 
-		{
-			res = ps.executeUpdate();
-			if(res > 0) 
-			{
-				ResultSet rs = ps.getGeneratedKeys();
-				rs.next();
-				res = rs.getInt(1);
-			}
-		} 
-		catch (SQLException e) 
-		{
-			e.printStackTrace();
-			throw e;
-		}
-		return res;
-	}
-	
-	public int executeInsertWithIdentity(String sql) throws SQLException  
-	{
-		System.out.println("DBConnection, Inserting: " + sql);
-		int res = -1;
-		try (Statement s = connection.createStatement()) 
-		{
-			res = s.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
-			if(res > 0) 
-			{
-				ResultSet rs = s.getGeneratedKeys();
-				rs.next();
-				res = rs.getInt(1);
-			}
 
-		} 
-		catch (SQLException e) 
-		{
-			e.printStackTrace();
-			throw e;
-		}
-		return res;
-	}
-	
-	public Connection getConnection() 
+    /**
+     * Retrieves the active database connection.
+     * 
+     * @return the active Connection object
+     */
+	public Connection getConnection()
 	{
 		return connection;
 	}
+
 	
-	public void disconnect() 
+	 /**
+     * Closes the current database connection.
+     */
+	public void disconnect()
 	{
-		try 
+		try
 		{
+			// Closes the connection
 			connection.close();
-		} 
-		catch (SQLException e) 
-		{
-			e.printStackTrace();
 		}
-	} 
+		
+		catch (SQLException exception)
+		{
+			exception.printStackTrace();
+		}
+	}
+	
+	
+    /**
+     * Starts a database transaction by disabling auto-commit mode.
+     * 
+     * @throws SQLException if an error occurs while setting auto-commit
+     */
+	public void startTransaction() throws SQLException
+	{
+		// Disables auto-commit mode to start a transaction
+		connection.setAutoCommit(false);
+	}
+
+	
+    /**
+     * Rolls back the current transaction and re-enables auto-commit mode.
+     * 
+     * @throws SQLException if an error occurs while rolling back
+     */
+	public void rollbackTransaction() throws SQLException
+	{
+		// Rolls back the transaction to revert any changes made during the transaction
+		connection.rollback();
+		
+		// Re-enables auto-commit mode so future statements are committed automatically
+		connection.setAutoCommit(true);
+	}
+
+	
+    /**
+     * Executes an INSERT statement and retrieves the generated identity key.
+     * 
+     * @param preparedStatement the prepared SQL statement
+     * @return the generated identity key, or -1 if no key was generated
+     * @throws SQLException if an error occurs during execution
+     */
+	public int executeInsertWithIdentity(PreparedStatement preparedStatement) throws SQLException
+	{
+		// Creates an integer variable named generatedKey and sets its initial value to -1
+		int generatedKey = -1;
+		
+		try
+		{
+			// Executes the insert statement and returns the number of affected rows
+			generatedKey = preparedStatement.executeUpdate();
+			
+			// Checks if the insertion was successful
+			if (generatedKey > 0)
+			{
+				// Retrieves the generated keys from the executed statement
+				ResultSet resultSet = preparedStatement.getGeneratedKeys();
+				
+				// Moves the cursor to the first row of the result set
+				resultSet.next();
+				
+				// Extracts the generated key from the first column, commonly this is the auto-incremented ID
+				generatedKey = resultSet.getInt(1);
+			}
+		}
+		
+		catch (SQLException exception)
+		{
+			// Prints the stack trace if an SQL exception occurs
+			exception.printStackTrace();
+			
+			// Throws the exception to be handled by the calling method
+			throw exception;
+		}
+		
+		// Returns the generated key (or -1 if the insertion failed)
+		return generatedKey;
+	}
+	
+
+    /**
+     * Executes an INSERT statement using a raw SQL string and retrieves the generated identity key.
+     * 
+     * @param sql the SQL INSERT statement
+     * @return the generated identity key, or -1 if no key was generated
+     * @throws SQLException if an error occurs during execution
+     */
+	public int executeInsertWithIdentity(String sql) throws SQLException
+	{
+		// Prints the SQL query that is being being executed to the console
+		System.out.println("DBConnection, Inserting: " + sql);
+		
+		// Creates an integer variable named generatedKey and sets its initial value to -1
+		int generatedKey = -1;
+		
+		// Tries to execute the SQL query using a Statement
+		try (Statement statement = connection.createStatement())
+		{
+			// Executes the insert statement and requests the generated keys
+			generatedKey = statement.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
+			
+			// Checks if the insert operation was successful
+			if (generatedKey > 0)
+			{
+				// Retrieves the generated keys from the executed statement
+				ResultSet resultSet = statement.getGeneratedKeys();
+				
+				// Moves the cursor to the first row of the result set
+				resultSet.next();
+	            
+				// Extracts the generated key (usually the auto-incremented ID) from the first column
+				generatedKey = resultSet.getInt(1);
+			}
+
+		}
+		
+		catch (SQLException exception)
+		{
+			// Prints the stack trace if an SQL exception occurs
+			exception.printStackTrace();
+			
+			// Throws the exception to be handled by the calling method
+			throw exception;
+		}
+		
+		// Returns the generated key (or -1 if the insertion failed)
+		return generatedKey;
+	}
 }

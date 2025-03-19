@@ -23,7 +23,7 @@ public class CustomerDB implements CustomerDaoImpl
 {
 	// it selects all the data in the Customer tabel 
 	private static final String FIND_ALL_QUERIES = "SELECT emailAddress, id, firstName, lastName, title, phoneNumber, streetName, houseNumber, floorNumber,"
-			+ " doorNumber, stateName, postalCode from Customer";
+			+ " doorNumber, stateName, postalCode, clubMember from Customer";
 	// this builds on FIND_ALL_QUERIES by adding a filter with a placeholder 
 	private static final String FIND_ALL_CUSTOMEREMAIL_QUERY = FIND_ALL_QUERIES + " where emailAddress = ?";
 	

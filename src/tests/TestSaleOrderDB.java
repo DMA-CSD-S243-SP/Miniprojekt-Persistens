@@ -48,7 +48,7 @@ public class TestSaleOrderDB
 	@AfterAll
 	public static void tearDown()
 	{
-		DBConnection.getInstance().disconnect();
+		//DBConnection.getInstance().disconnect();
 	}
 	
 	@Test

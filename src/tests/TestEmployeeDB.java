@@ -35,11 +35,10 @@ public class TestEmployeeDB
 		employeeDB = new EmployeeDB();	
 	}
 	
-	// closes  the connection to the database after each test
 	@AfterAll
 	public static void tearDown()
 	{
-		DBConnection.getInstance().disconnect();
+		
 	}
 
 	/**

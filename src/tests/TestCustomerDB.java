@@ -35,11 +35,10 @@ public class TestCustomerDB
 		customerDB = new CustomerDB();
 	}
 	
-	// closes  the connection to the database after each test
 	@AfterAll
 	public static void tearDown()
 	{
-		DBConnection.getInstance().disconnect();
+		
 	}
 
 	/**

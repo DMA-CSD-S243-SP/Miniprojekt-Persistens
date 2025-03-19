@@ -41,7 +41,7 @@ public class TestDBConnection
     @AfterAll
     public static void tearDown()
     {
-        dbConnection.disconnect();
+        //dbConnection.disconnect();
     }
 
     

@@ -18,7 +18,7 @@ import model.SaleOrderLine;
  */
 public class TestSaleOrder 
 {
-    private Product product1, product2, product3, product4, product5, product6, product7, product8, product9;
+    private Product product1, product2, product3, product4, product5, product6, product7, product8, product9, product10, product11, product12;
     private Employee employee1, employee2, employee3, employee4;
     private Customer customer1, customer2, customer3, customer4;
 	
@@ -35,11 +35,14 @@ public class TestSaleOrder
         product3 = new Product(3, "Cowboyhat - Mørk", 120.00, 200.00, "USA", 20);
         product4 = new Product(4, "Cowboyhat - Enhjørningskind", 225.00, 1500.00, "USA", 20);
         product5 = new Product(5, "Realistisk Revolver - 50 caliber", 50.00, 750.00, "Ungarn", 15);
-        product6 = new Product(6, "Cowboystøvler - Brunt Læder", 90.00, 251.00, "Polen", 30);
+        product6 = new Product(6, "Cowboystøvler - Brunt Læder", 90.00, 250.01, "Polen", 30);
    		product7 = new Product(7, "Cowboystøvler - Sort Læder", 90.00, 500.00, "Polen", 30);
 		product8 = new Product(8, "Hælsporre", 40.00, 200.00, "Ungarn", 30);
 		product9 = new Product(9, "Buffaloslips", 60.00, 100.00, "USA", 40);
-        
+		product10 = new Product(10, "Cowboy Lommeuld", 0.00, 0.01, "USA", 5);
+		product11 = new Product(11, "Sterling Silver Cowboy MAGA Hat", 4200.00, 5000.00, "USA", 5);
+		product12 = new Product(12, "Forgyldt 24Carat Cowboy MAGA Hat", 7000.00, 10000.00, "USA", 3);
+		
 		
         // Create Employees
         employee1 = new Employee(1000, "Jens", "Hansen", "Manager", "12345678", "jens@example.com", "Danmark", "Hovedstaden", "København", 1000, "Strøget", 10, 2, "A");
@@ -52,9 +55,29 @@ public class TestSaleOrder
         customer1 = new Customer(101, "Mikkel", "Poulsen", "22334455", "mikkel@example.com", true, "Danmark", "Hovedstaden", "Frederiksberg", 2000, "Gammel Kongevej", 15, 1, "1A");
         customer2 = new Customer(102, "Sofie", "Jørgensen", "33445566", "sofie@example.com", true, "Danmark", "Nordjylland", "Aalborg", 9000, "Boulevarden", 25, 2, "2B");
         customer3 = new Customer(103, "Rasmus", "Madsen", "44556677", "rasmus@example.com", false, "Danmark", "Sjælland", "Roskilde", 4000, "Algade", 30, 4, "3C");
-        customer4 = new Customer(103, "Rasmus", "Madsen", "44556677", "rasmus@example.com", false, "Danmark", "Sjælland", "Roskilde", 4000, "Algade", 30, 4, "3C");
+        customer4 = new Customer(103, "Andreas", "Jensen", "44556677", "rasmus@example.com", false, "Danmark", "Sjælland", "Roskilde", 4000, "Algade", 30, 4, "3C");
     }
     
+    
+    /**
+     * Tests if the customer is a club member does not receive the 10% discount
+     * when purchasing goods for exactly 0.01
+     */
+    @Test
+    public void testGetTotalOrderPriceForClubMembersLowOrder()
+    {
+        // Create Sale Order with a selected products
+        SaleOrder saleOrder1 = new SaleOrder(customer2, employee2, false, LocalDate.now(), LocalDate.now(), false, LocalDate.now());
+
+        // Add SaleOrderLines
+        SaleOrderLine saleOrderLine1 = new SaleOrderLine(1, product10, product10.getSalesPrice());
+       
+        // Adds sale order lines to the SaleOrder
+        saleOrder1.addSaleOrderLine(saleOrderLine1);
+
+        // Assert total price should be 0.01
+        assertEquals(0.01, saleOrder1.getTotalOrderPrice());
+    }
     
     
     /**
@@ -102,10 +125,56 @@ public class TestSaleOrder
         assertEquals(1500.00, saleOrder2.getTotalOrderPrice());
     }
     
+    
+    /**
+     * Tests if the customer is a club member does not receive the 10% discount
+     * when purchasing goods for exactly 5000
+     */
+    @Test
+    public void testGetTotalOrderPriceForClubMembersHighOrder()
+    {
+        // Create Sale Order with a selected products
+        SaleOrder saleOrder1 = new SaleOrder(customer2, employee2, false, LocalDate.now(), LocalDate.now(), false, LocalDate.now());
+
+        // Add SaleOrderLines
+        SaleOrderLine saleOrderLine1 = new SaleOrderLine(1, product11, product11.getSalesPrice());
+       
+        // Adds sale order lines to the SaleOrder
+        saleOrder1.addSaleOrderLine(saleOrderLine1);
+
+        // Assert total price should be 4500
+        assertEquals(4500.00, saleOrder1.getTotalOrderPrice());
+    }
+    
+    
+    /**
+     * Tests if the customer is a private customer and does not receive the free freight
+     * order perk when purchasing goods for exactly 0.01 (45.01)
+     */
+    @Test
+    public void testGetTotalOrderPriceForPrivateCustomersLowOrder()
+    {
+        // Create Sale Order with a selected products
+        SaleOrder saleOrder1 = new SaleOrder(customer4, employee1, false, LocalDate.now(), LocalDate.now(), false, LocalDate.now());
+
+        // Add SaleOrderLines
+        SaleOrderLine saleOrderLine1 = new SaleOrderLine(1, product10, product10.getSalesPrice());
+
+        // Adds sale order lines to the SaleOrder
+        saleOrder1.addSaleOrderLine(saleOrderLine1);
+
+        // Finalizes the sale order
+        saleOrder1.finalizeSaleOrder();
+        
+        // Assert total price should be 45.01
+        assertEquals(45.01, saleOrder1.getTotalOrderPrice());
+    }
+    
+    
 
     /**
      * Tests if the customer is a private customer and does receive the free freight
-     * order perk when purchasing goods for over 2500 (2501)
+     * order perk when purchasing goods for over 2500 (2500.01)
      */
     @Test
     public void testGetTotalOrderPriceForPrivateCustomersWithOrderPerks()
@@ -121,8 +190,8 @@ public class TestSaleOrder
         saleOrder3.addSaleOrderLine(saleOrderLine5);
         saleOrder3.addSaleOrderLine(saleOrderLine6);
         
-        // Assert total price should be 2456.0
-        assertEquals(2456.0, saleOrder3.getTotalOrderPrice());
+        // Assert total price should be 2500.01
+        assertEquals(2500.01, saleOrder3.getTotalOrderPrice());
     }
     
     
@@ -151,5 +220,30 @@ public class TestSaleOrder
         
         // Assert total price should be 2500
         assertEquals(2500.0, saleOrder4.getTotalOrderPrice());
+    }
+    
+    
+    
+    /**
+     * Tests if the customer is a private customer and does not receive the free freight
+     * order perk when purchasing goods for exactly 10000.00 (10000.00)
+     */
+    @Test
+    public void testGetTotalOrderPriceForPrivateCustomersHighOrder()
+    {
+        // Create Sale Order with a selected products
+        SaleOrder saleOrder1 = new SaleOrder(customer4, employee1, false, LocalDate.now(), LocalDate.now(), false, LocalDate.now());
+
+        // Add SaleOrderLines
+        SaleOrderLine saleOrderLine1 = new SaleOrderLine(1, product12, product12.getSalesPrice());
+
+        // Adds sale order lines to the SaleOrder
+        saleOrder1.addSaleOrderLine(saleOrderLine1);
+
+        // Finalizes the sale order
+        saleOrder1.finalizeSaleOrder();
+        
+        // Assert total price should be 10000.00
+        assertEquals(10000.00, saleOrder1.getTotalOrderPrice());
     }
 }

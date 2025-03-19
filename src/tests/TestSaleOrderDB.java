@@ -44,8 +44,9 @@ public class TestSaleOrderDB
 		saleOrder = new SaleOrder(null, null, false, null, null, false, null);
 		employee = new Employee(1000, "John", "Smith", "boss", "11111111", "johnsmith@example.com", "Denmark",
 				"region midtjylland", "Mønsted", 8800, "Badstreet", 12, 0, null);
-		customer = new Customer(101, "John", "Doe", "Private", "12121212", "mikkel@example.com", false, "Denmark",
-				"region sydjylland", "Sønderborg", 1121, "Alexgade", 13, 5, "12B");
+		
+		customer = new Customer(101, "John", "Doe", "12121212", "mikkel@example.com", false, "Denmark", "region sydjylland", "Sønderborg", 1121, "Alexgade", 13, 5, "12B");
+		
 		p = new Product(1, "nuclear bomb", 100, 250, "Russia", 10);
 	}
 

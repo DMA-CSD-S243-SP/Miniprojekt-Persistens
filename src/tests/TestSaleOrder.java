@@ -49,10 +49,10 @@ public class TestSaleOrder
 
         
         // Create Customers
-        customer1 = new Customer(101, "Mikkel", "Poulsen", "Regular", "22334455", "mikkel@example.com", true, "Danmark", "Hovedstaden", "Frederiksberg", 2000, "Gammel Kongevej", 15, 1, "1A");
-        customer2 = new Customer(102, "Sofie", "Jørgensen", "VIP", "33445566", "sofie@example.com", true, "Danmark", "Nordjylland", "Aalborg", 9000, "Boulevarden", 25, 2, "2B");
-        customer3 = new Customer(103, "Rasmus", "Madsen", "Business", "44556677", "rasmus@example.com", false, "Danmark", "Sjælland", "Roskilde", 4000, "Algade", 30, 4, "3C");
-        customer4 = new Customer(103, "Rasmus", "Madsen", "Business", "44556677", "rasmus@example.com", false, "Danmark", "Sjælland", "Roskilde", 4000, "Algade", 30, 4, "3C");
+        customer1 = new Customer(101, "Mikkel", "Poulsen", "22334455", "mikkel@example.com", true, "Danmark", "Hovedstaden", "Frederiksberg", 2000, "Gammel Kongevej", 15, 1, "1A");
+        customer2 = new Customer(102, "Sofie", "Jørgensen", "33445566", "sofie@example.com", true, "Danmark", "Nordjylland", "Aalborg", 9000, "Boulevarden", 25, 2, "2B");
+        customer3 = new Customer(103, "Rasmus", "Madsen", "44556677", "rasmus@example.com", false, "Danmark", "Sjælland", "Roskilde", 4000, "Algade", 30, 4, "3C");
+        customer4 = new Customer(103, "Rasmus", "Madsen", "44556677", "rasmus@example.com", false, "Danmark", "Sjælland", "Roskilde", 4000, "Algade", 30, 4, "3C");
     }
     
     

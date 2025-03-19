@@ -15,7 +15,6 @@ public class Customer
 	private int customerNumber;
 	private String firstName;
 	private String lastName;
-	private String customerType;
 	private String phoneNumber;
 	private String emailAddress;
 	private boolean clubMember;
@@ -36,7 +35,6 @@ public class Customer
 	 * @param customerNumber     The customer's unique id.
 	 * @param firstName          The customer's first name.
 	 * @param lastName           The customer's last name.
-	 * @param customerType       The type of customer (e.g., regular, VIP).
 	 * @param phoneNumber        The customer's phone number.
 	 * @param emailAddress       The customer's email address.
 	 * @param clubMember         Whether the customer is a club member.
@@ -49,14 +47,13 @@ public class Customer
 	 * @param floorNumber        The floor number in case of an apartment.
 	 * @param doorNumber         The specific door number or unit identifier.
 	 */
-	public Customer(int customerNumber, String firstName, String lastName, String customerType, String phoneNumber, String emailAddress,
+	public Customer(int customerNumber, String firstName, String lastName, String phoneNumber, String emailAddress,
 			boolean clubMember, String country, String state, String city, int postalCode,
 			String streetName, int houseNumber,	int floorNumber, String doorNumber)
 	{
 		this.customerNumber = customerNumber;
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.customerType = customerType;
 		this.phoneNumber = phoneNumber;
 		this.emailAddress = emailAddress;
 		this.clubMember = clubMember;
@@ -127,28 +124,6 @@ public class Customer
 	public String getLastName()
 	{
 		return lastName;
-	}
-
-	
-	/**
-	 * Gets the type of customer.
-	 *
-	 * @return The customer type.
-	 */
-	public String getCustomerType()
-	{
-		return customerType;
-	}
-
-	
-	/**
-	 * Sets the type of customer.
-	 *
-	 * @param customerType The customer type to set.
-	 */
-	public void setCustomerType(String customerType)
-	{
-		this.customerType = customerType;
 	}
 
 	
@@ -442,7 +417,6 @@ public class Customer
         return "Customer [" +
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", customerType='" + customerType + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", emailAddress='" + emailAddress + '\'' +
                 ", clubMember=" + clubMember +

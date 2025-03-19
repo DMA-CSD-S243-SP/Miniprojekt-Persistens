@@ -9,11 +9,12 @@ import java.util.List;
 
 import model.Employee;
 
+
 /**
  * This class is responsible for accessing and managing employee objects stored
  * in a database.
  * 
- * It implements the employeeDapImpl, meaning its implements its methods
+ * It implements the employeeDaoImpl, meaning it implements its methods
  * 
  * @author Anders Have & Christoffer Søndergaard
  * @version 19/03/2025 - 19:33
@@ -21,11 +22,12 @@ import model.Employee;
 public class EmployeeDB implements EmployeeDaoImpl
 {
 	// Selects all of the data within the Employee table in the database
-	private static final String FIND_ALL_QUERIES = "SELECT id, firstName, lastName, title, phoneNumber, emailAddress, streetName, streetName, houseNumber, floorNumber, doorNumber, stateName, postalCode from Employee";
+	private static final String FIND_ALL_QUERIES = "SELECT id, firstName, lastName, title, phoneNumber, emailAddress, streetName, streetName, houseNumber, floorNumber, doorNumber, stateName, postalCode FROM Employee";
 
-	// This extends on the FIND_ALL_QUERIES by adding a filtering condition with a placeholder for employee id
-	private static final String FIND_ALL_EMPLOYEEID_QUERY = FIND_ALL_QUERIES + " where id = ?";
+	// This extends on the FIND_ALL_QUERIES by adding a filtering condition with a placeholder in the form of "?" for employee id
+	private static final String FIND_ALL_EMPLOYEEID_QUERY = FIND_ALL_QUERIES + " WHERE id = ?";
 
+	// PreparedStatement are used to execute queries efficiently, and prevent SQL injections
 	// PreparedStatement for retrieving all employees from the database
 	private PreparedStatement findAllEmployee;
 	
@@ -104,7 +106,7 @@ public class EmployeeDB implements EmployeeDaoImpl
 			// Adds the employee id provided in the method's parameter to the String instead of the placeholder
 			findByEmployeeId.setInt(1, employeeId);
 			
-			// Executes the query, and stores the retrieved data in the variable named resultSet
+			// Executes the query, and stores the retrieved data in the variable named resultSet, which is a ResultSet object
 			ResultSet resultSet = findByEmployeeId.executeQuery();
 			
 			// Creates and initializes an Employee object as null, which will later be populated with Employee specific data

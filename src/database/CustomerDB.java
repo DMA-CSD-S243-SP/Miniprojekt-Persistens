@@ -11,11 +11,10 @@ import model.Customer;
 
 
 /**
- *  This class is responsible for accessing 
- * and managing customer objects stored in a database.
+ * This class is responsible for accessing and managing customer objects stored
+ * in a database.
  * 
- * It implements the customerDapImpl, 
- * meaning its implements its methods
+ * It implements the employeeDaoImpl, meaning it implements its methods
  * 
  * @author Anders Have, Lumière Schack & Christoffer Søndergaard
  * @version 19/03/2025 - 17:43
@@ -23,11 +22,12 @@ import model.Customer;
 public class CustomerDB implements CustomerDaoImpl
 {
 	// Selects all of the data within the Customer table in the database
-	private static final String FIND_ALL_QUERIES = "SELECT emailAddress, id, firstName, lastName, title, phoneNumber, streetName, houseNumber, floorNumber," + " doorNumber, stateName, postalCode, clubMember from Customer";
+	private static final String FIND_ALL_QUERIES = "SELECT emailAddress, id, firstName, lastName, title, phoneNumber, streetName, houseNumber, floorNumber, doorNumber, stateName, postalCode, clubMember FROM Customer";
 
-	// This extends on the FIND_ALL_QUERIES by adding a filtering condition with a placeholder for email address
-	private static final String FIND_ALL_CUSTOMEREMAIL_QUERY = FIND_ALL_QUERIES + " where emailAddress = ?";
+	// This extends on the FIND_ALL_QUERIES by adding a filtering condition with a placeholder in the form of "?" for email address
+	private static final String FIND_ALL_CUSTOMEREMAIL_QUERY = FIND_ALL_QUERIES + " WHERE emailAddress = ?";
 	
+	// PreparedStatement are used to execute queries efficiently, and prevent SQL injections
 	// PreparedStatement for retrieving all customers from the database
 	private PreparedStatement findAllCustomer; 
 	
@@ -107,7 +107,7 @@ public class CustomerDB implements CustomerDaoImpl
 			// Adds the email address provided in the method's parameter to the String instead of the placeholder
 			findByCustomerEmail.setString(1, customerEmail);
 			
-			// Executes the query, and stores the retrieved data in the variable named resultSet
+			// Executes the query, and stores the retrieved data in the variable named resultSet, which is a ResultSet object
 			ResultSet resultSet = findByCustomerEmail.executeQuery();
 			
 			// Creates and initializes a Customer object as null, which will later be populated with Customer specific data
@@ -135,7 +135,7 @@ public class CustomerDB implements CustomerDaoImpl
     /**
      * Builds a specific Customer object from a database result set.
      * 
-     * @param customerResultSet the result set containing customer data
+     * @param resultSet the result set containing customer data
      * @return a Customer object with the extracted data
      * @throws SQLException if accessing the result set fails
      */
@@ -170,7 +170,7 @@ public class CustomerDB implements CustomerDaoImpl
     /**
      * Converts a result set into a list of Customer objects.
      * 
-     * @param customerResultSet the result set containing multiple customer records
+     * @param resultSet the result set containing multiple customer records
      * @return a list of Customer objects
      * @throws SQLException if accessing the result set fails
      */

@@ -9,6 +9,7 @@ import java.util.List;
 
 import model.Customer;
 
+
 /**
  *  This class is responsible for accessing 
  * and managing customer objects stored in a database.
@@ -16,57 +17,77 @@ import model.Customer;
  * It implements the customerDapImpl, 
  * meaning its implements its methods
  * 
- * @author Anders Have
- * @version 13/03/2025 - 13:35
+ * @author Anders Have, Lumière Schack & Christoffer Søndergaard
+ * @version 19/03/2025 - 17:43
  */
 public class CustomerDB implements CustomerDaoImpl
 {
-	// it selects all the data in the Customer tabel 
-	private static final String FIND_ALL_QUERIES = "SELECT emailAddress, id, firstName, lastName, title, phoneNumber, streetName, houseNumber, floorNumber,"
-			+ " doorNumber, stateName, postalCode, clubMember from Customer";
-	// this builds on FIND_ALL_QUERIES by adding a filter with a placeholder 
+	// Selects all of the data within the Customer table in the database
+	private static final String FIND_ALL_QUERIES = "SELECT emailAddress, id, firstName, lastName, title, phoneNumber, streetName, houseNumber, floorNumber," + " doorNumber, stateName, postalCode, clubMember from Customer";
+
+	// This extends on the FIND_ALL_QUERIES by adding a filtering condition with a placeholder for email address
 	private static final String FIND_ALL_CUSTOMEREMAIL_QUERY = FIND_ALL_QUERIES + " where emailAddress = ?";
 	
+	// PreparedStatement for retrieving all customers from the database
 	private PreparedStatement findAllCustomer; 
+	
+	// PreparedStatement for retrieving a customer based on their email address
 	private PreparedStatement findByCustomerEmail;
-	
-	public CustomerDB() throws SQLException {
-		findAllCustomer = DBConnection.getInstance().getConnection()
-				.prepareStatement(FIND_ALL_QUERIES);
-		findByCustomerEmail = DBConnection.getInstance().getConnection()
-				.prepareStatement(FIND_ALL_CUSTOMEREMAIL_QUERY);
-	}
-	
-	
-	/**
-	 * this method finds all the Customers in the database
-	 */
-	@Override
-	public List<Customer> findAllCustomers() throws DataAccessException 
-	{
-		Connection con = DBConnection.getInstance().getConnection();
-		try 
-		{
-			findAllCustomer = con.prepareStatement(FIND_ALL_QUERIES);
-			//executes the preparedstatement
-			ResultSet resultSet = findAllCustomer.executeQuery();
-			
-			//makes a list and asks buildObjects to make the data into java objects 
-			List<Customer> res = buildObjects(resultSet);
-			return res;
-		} catch (SQLException e) 
-		{
-			throw new DataAccessException("Could not find all", e);
-		}
-	}
 
 	
 	/**
-	 * this method find a single Customer by searching with customerEmail.
+	 * Constructor for CustomerDB.
+	 * Initializes prepared statements for executing SQL queries.
+	 * 
+	 * @throws SQLException if there is an issue with the database connection
 	 */
+	public CustomerDB() throws SQLException
+	{
+		// Prepares the SQL statement for retrieving all customers
+		findAllCustomer = DBConnection.getInstance().getConnection().prepareStatement(FIND_ALL_QUERIES);
+		
+		// Prepares the SQL statement for retrieving a customer by email
+		findByCustomerEmail = DBConnection.getInstance().getConnection().prepareStatement(FIND_ALL_CUSTOMEREMAIL_QUERY);
+	}
+	
 	
     /**
-     * Finds a single Customer object by searching for a customer with a matching email address.
+     * Retrieves all customers from the database.
+     * 
+     * @return a list of all customers
+     * @throws DataAccessException if retrieval fails
+     */
+	@Override
+	public List<Customer> findAllCustomers() throws DataAccessException 
+	{
+		// Gets a connection to the database
+		Connection databaseConnection = DBConnection.getInstance().getConnection();
+		
+		try
+		{
+			// Prepare a SQL statement to retrieve all customers
+			findAllCustomer = databaseConnection.prepareStatement(FIND_ALL_QUERIES);
+			
+			// Executes the prepared statement and stores the result set
+			ResultSet customerResultSet = findAllCustomer.executeQuery();
+			
+			// Converts the result set into a list of Customer objects
+			List<Customer> listOfCustomers = buildObjects(customerResultSet);
+			
+			// Returns the list of Customer objects
+			return listOfCustomers;
+		}
+		
+		catch (SQLException exception) 
+		{
+			// If an SQL error occurs a custom exception is thrown with the specified details
+			throw new DataAccessException("Unable to find Customer objects in the database", exception);
+		}
+	}
+
+
+    /**
+     * Finds a Customer object by searching for a customer with a matching email address.
      * 
      * @param customerEmail the email address to search for
      * @return the corresponding Customer object, or null if not found
@@ -75,32 +96,37 @@ public class CustomerDB implements CustomerDaoImpl
 	@Override
 	public Customer findCustomerByEmail(String customerEmail) throws DataAccessException 
 	{
+		// Gets a connection to the database
 		Connection databaseConnection  = DBConnection.getInstance().getConnection();
 		
 		try
 		{
-			
+			// Prepares a SQL statement to find and retrieve a customer with a matching email address
 			findByCustomerEmail = databaseConnection.prepareStatement(FIND_ALL_CUSTOMEREMAIL_QUERY);
 			
-			// Adds the parameter to the String instead of the placeholder.
+			// Adds the email address provided in the method's parameter to the String instead of the placeholder
 			findByCustomerEmail.setString(1, customerEmail);
 			
-			// Executes the preparedstatement
+			// Executes the query, and stores the retrieved data in the variable named resultSet
 			ResultSet resultSet = findByCustomerEmail.executeQuery();
 			
+			// Creates and initializes a Customer object as null, which will later be populated with Customer specific data
 			Customer customer = null;
 			
+			// Iterates through the resultSet while there are still more rows in the database's table
 			if(resultSet.next())
 			{
-				// makes a Customer object out of the data found.
+				// Converts the retrieved database row into a Customer object using the buildObject method
 				customer = buildObject(resultSet);
 			}
 			
+			// Returns the customer with a matching e-mail or null if no customer has the specified emailAddress
 			return customer;
 		}
 		
 		catch (SQLException exception)
 		{
+			// If an SQL error occurs a custom exception is thrown with the specified details
 			throw new DataAccessException("Unable to find a Customer object with an e-mail address matching: " + customerEmail, exception);
 		}	
 	}
@@ -120,13 +146,16 @@ public class CustomerDB implements CustomerDaoImpl
 				resultSet.getInt("id"),
 				resultSet.getString("firstName"),
 				resultSet.getString("lastName"),
-				/* resultSet.getString("customerType") */// null,
 				resultSet.getString("phoneNumber"),
 				resultSet.getString("emailAddress"),
 				resultSet.getBoolean("clubMember"),
-				/* resultSet.getString("country") */ null,
+				// country - We supply null here, as country can be deducted from the supplied State, hence no need to waste storage within the database for this
+				null,
+
 				resultSet.getString("stateName"),
-				/* resultSet.getString("city") */ null,
+				
+				// city - We supply null here, as country can be deducted from the supplied Postal Code, hence no need to waste storage within the database for this
+				null,
 				resultSet.getInt("postalCode"),
 				resultSet.getString("streetName"),
 				resultSet.getInt("houseNumber"),
@@ -147,13 +176,17 @@ public class CustomerDB implements CustomerDaoImpl
      */
 	private List<Customer> buildObjects(ResultSet resultSet) throws SQLException 
 	{
+		// Creates an empty list to store Customer objects within
 		List<Customer> customerList = new ArrayList<>();
 		
+		// Iterates through the result set while there are still more rows in the database's table
 		while(resultSet.next())
 		{
+			// Converts each row into a Customer object and add it to the list
 			customerList.add(buildObject(resultSet));
 		}
 		
+		// Returns the populated list of Customer objects
 		return customerList;
-	}	
+	}
 }

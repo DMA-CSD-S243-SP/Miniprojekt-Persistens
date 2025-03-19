@@ -99,6 +99,7 @@ create table Customer
 	houseNumber int,
 	floorNumber int,
 	doorNumber varchar(15),
+	clubMember bit,
 	stateName varchar(30),
 	postalCode int,
 

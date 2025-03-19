@@ -221,6 +221,11 @@ public class SaleOrder
     {
         return this.createdDate.plusDays(7);
     }
+    
+    public List<SaleOrderLine> getOrderLines()
+    {
+    	return saleOrderLineList;
+    }
 
     
     /**

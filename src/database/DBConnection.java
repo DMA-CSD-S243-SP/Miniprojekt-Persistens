@@ -39,7 +39,7 @@ public class DBConnection
 	private static final String userName = "DMA-CSD-S243_10644781";
 	
 	// Database password
-	private static final String password = "Passedword";
+	private static final String password = "Password1!";
 
 	
     /**

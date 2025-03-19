@@ -44,11 +44,10 @@ public class TestSaleOrderDB
 		p = new Product(199, "nuclear bomb", 100, 250, "Russia", 10);
 	}
 	
-	// closes  the connection to the database after each test
 	@AfterAll
 	public static void tearDown()
 	{
-		//DBConnection.getInstance().disconnect();
+		
 	}
 	
 	@Test

@@ -31,7 +31,7 @@ public class TestSaleOrder
     {
         // Create Products
         product1 = new Product(1, "Cowboyhat - Sandfarvet", 200.00, 250.00, "USA", 20);
-        product2 = new Product(2, "Cowboyhat - Krokodilleskind", 225.00, 251.00, "USA", 20);
+        product2 = new Product(2, "Cowboyhat - Krokodilleskind", 225.00, 250.01, "USA", 20);
         product3 = new Product(3, "Cowboyhat - Mørk", 120.00, 200.00, "USA", 20);
         product4 = new Product(4, "Cowboyhat - Enhjørningskind", 225.00, 1500.00, "USA", 20);
         product5 = new Product(5, "Realistisk Revolver - 50 caliber", 50.00, 750.00, "Ungarn", 15);
@@ -82,7 +82,7 @@ public class TestSaleOrder
     
     /**
      * Tests if the customer is a club member and receives the 10% discount
-     * when purchasing goods for over 1500 (1501)
+     * when purchasing goods for over 1500 (1500.01)
      */
     @Test
     public void testGetTotalOrderPriceForClubMembersWithOrderPerks()
@@ -100,8 +100,8 @@ public class TestSaleOrder
         saleOrder1.addSaleOrderLine(saleOrderLine2);
         saleOrder1.addSaleOrderLine(saleOrderLine3);
 
-        // Assert total price should be 1350.90
-        assertEquals(1350.90, saleOrder1.getTotalOrderPrice());
+        // Assert total price should be 1350,009
+        assertEquals(1350.009, saleOrder1.getTotalOrderPrice());
     }
 
     

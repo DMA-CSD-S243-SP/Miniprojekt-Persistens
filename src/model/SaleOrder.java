@@ -307,7 +307,7 @@ public class SaleOrder
         else
         {
         	// Adds the cost value of freightCharge to the order's total price
-        	totalOrderPrice += freightCharge;
+        	totalOrderPrice = totalOrderPrice + freightCharge;
         	
         	// If the value of the totalOrderPrice is larger than the customer's required purchase threshold then execute this section
         	if(totalOrderPrice > customer.getPurchaseThreshhold())
